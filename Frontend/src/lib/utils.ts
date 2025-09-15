@@ -24,3 +24,19 @@ export const useAuth = () => {
 export const AuthContext = createContext<AuthContextType | undefined>(
   undefined
 );
+
+interface ModuleProviderType {
+  isWorksOpen: boolean;
+  setIsWorksOpen: (value: boolean) => void;
+}
+
+export const ModuleContext = createContext<ModuleProviderType>({
+  isWorksOpen: false,
+  setIsWorksOpen: () => {},
+});
+
+export const useModule = () => {
+  const ctx = useContext(ModuleContext);
+  if (!ctx) throw new Error("useModule must be used within <moduleProvider>");
+  return ctx;
+};

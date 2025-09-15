@@ -1,7 +1,7 @@
-import { useSlides } from "@/lib/query";
+import { useSlides, useSådan } from "@/lib/query";
 import { createFileRoute } from "@tanstack/react-router";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -9,9 +9,10 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const { data: Slides } = useSlides();
+  const { data: item } = useSådan();
 
   return (
-    <figure className=" relative flex w-full min-h-[calc(100vh-80px)] items-stretch justify-stretch">
+    <figure className="flex-col relative w-full min-h-[calc(100vh-80px)] items-stretch justify-stretch">
       <Swiper
         autoplay={{
           delay: 10000,
@@ -23,13 +24,16 @@ function Index() {
           clickable: true,
         }}
         navigation={true}
-        modules={[Autoplay, Pagination, Navigation]}
+        modules={[Autoplay, Pagination]}
         className="w-full max-h-[calc(100vh-80px)]"
       >
         {Slides.map(({ imageUrl, id, text }) => (
-          <SwiperSlide key={id} className="relative">
+          <SwiperSlide
+            key={id}
+            className="relative w-full h-full min-h-[calc(100vh-80px)]"
+          >
             <img
-              className="object-cover w-full h-full"
+              className="object-cover w-full h-full min-h-[calc(100vh-80px)] min-w-full max-w-full max-h-full"
               src={imageUrl}
               alt={"slide image"}
             />
@@ -41,6 +45,15 @@ function Index() {
           </SwiperSlide>
         ))}
       </Swiper>
+
+      <section className="md:hidden p-4">
+        {item.map(({ content, id, title }) => (
+          <article key={id}>
+            <h2 className="font-bold">{title}</h2>
+            <p dangerouslySetInnerHTML={{ __html: content }} />
+          </article>
+        ))}
+      </section>
     </figure>
   );
 }

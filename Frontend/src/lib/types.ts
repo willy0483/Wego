@@ -67,3 +67,9 @@ export interface T_Slides {
   imageUrl: string;
   text: string;
 }
+
+export interface T_SådanVirkerDet {
+  id: number;
+  title: string;
+  content: string;
+}
