@@ -58,60 +58,12 @@ export interface CreateUser {
 
 export interface User {
   id: number;
-  name: string;
+  firstname: string;
+  lastname: string;
 }
 
-export interface T_Product {
+export interface T_Slides {
   id: number;
-  title: string;
-  slug: string;
-  description: string;
   imageUrl: string;
-  procedure: string;
-  durationInMinutes: number;
-  amount: number;
-  price: number;
-  isActive: boolean;
-  createdAt: string;
-  updatedAt: string;
-  favorites: T_Favorite[];
-  numFavorites: number;
-}
-
-export interface T_Favorite {
-  userId: number;
-}
-
-export interface T_ProductDetails {
-  id: number;
-  title: string;
-  slug: string;
-  description: string;
-  imageUrl: string;
-  procedure: string;
-  durationInMinutes: number;
-  amount: number;
-  price: number;
-  isActive: boolean;
-  createdAt: string;
-  updatedAt: string;
-  productIngredients: ProductIngredient[];
-}
-export interface ProductIngredient {
-  id: number;
-  productId: number;
-  ingredientId: number;
-  unitId: number;
-  amount: number;
-  orderNum: number;
-  ingredients: Ingredients;
-  units: Units;
-}
-export interface Ingredients {
-  title: string;
-}
-
-export interface Units {
-  name: string;
-  abbreviation: string;
+  text: string;
 }

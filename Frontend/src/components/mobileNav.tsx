@@ -2,8 +2,8 @@ import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "./ui/sheet";
 import { useAuth } from "@/lib/utils";
 import { CiMenuFries } from "react-icons/ci";
-import { Button } from "./ui/button";
 import { toast } from "sonner";
+import { House, Search } from "lucide-react";
 
 const Nav = () => {
   const location = useLocation();
@@ -14,24 +14,14 @@ const Nav = () => {
 
   const links = [
     {
-      name: "home",
+      name: "Forside",
       path: "/",
+      icon: <House />,
     },
     {
-      name: "products",
-      path: "/products",
-    },
-    {
-      name: "resume",
-      path: "/resume",
-    },
-    {
-      name: "work",
-      path: "/work",
-    },
-    {
-      name: "contact",
-      path: "/contact",
+      name: "Find it lift",
+      path: "/lift",
+      icon: <Search />,
     },
   ];
   const handleLogout = () => {
@@ -53,35 +43,49 @@ const Nav = () => {
       >
         <SheetTitle className="hidden">Navbar</SheetTitle>
 
+        <h2 className="absolute top-20 text-2xl w-full text-center">
+          {loginData?.user.firstname}
+        </h2>
+
         {/* nav */}
         <nav className="flex flex-col justify-center items-center gap-8 mx-10 mt-40">
-          {links.map((link, index) => {
-            const isActive = link.path === pathname;
+          {links.map(({ path, icon, name }, index) => {
+            const isActive = path === pathname;
             return (
               <Link
-                to={link.path}
+                to={path}
                 key={index}
-                className={`${isActive ? "text-app-primary border-b-2 border-app-primary" : ""} hover:text-app-primary transition-colors duration-150`}
+                className={`flex items-center w-full relative max-w-[180px] py-2 px-2 rounded-md hover:text-app-primary transition-colors duration-150 ${isActive ? "text-app-primary font-semibold" : "text-black"}`}
               >
-                {link.name}
+                <span
+                  className={`text-2xl mr-3 ${isActive ? "text-app-primary" : "text-black"}`}
+                >
+                  {icon}
+                </span>
+                <span
+                  className={`text-lg flex-1 ${isActive ? "text-app-primary" : "text-black"}`}
+                >
+                  {name}
+                </span>
+                {isActive && (
+                  <span className="absolute left-0 bottom-0 w-full h-0.5 bg-app-primary rounded" />
+                )}
               </Link>
             );
           })}
 
           {isLoggedIn ? (
-            <Button
-              aria-label="Logout"
+            <button
+              className="bg-transparent rounded-xl hover:cursor-pointer text-black border-2 border-app-primary py-2 px-4"
               onClick={handleLogout}
-              className="hover:text-app-primary transition-colors duration-150"
             >
               Logout
-            </Button>
+            </button>
           ) : (
-            <Link
-              to="/login"
-              className={`${pathname === "/login" ? "text-app-primary border-b-2 border-app-primary" : ""} hover:cursor-pointer hover:text-app-primary transition-colors duration-150`}
-            >
-              Login
+            <Link to="/login">
+              <button className="bg-app-primary rounded-xl hover:cursor-pointer text-white py-2 px-4">
+                Login
+              </button>
             </Link>
           )}
         </nav>

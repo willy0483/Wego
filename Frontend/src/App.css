@@ -1,16 +1,21 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@import "swiper/css/pagination";
+@import "swiper/css/scrollbar";
+@import "swiper/css";
+@import "swiper/css/effect-coverflow";
+
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --color-app-primary: #2563eb;
-  --color-app-secondary: #64748b;
-  --color-app-accent: #f59e42;
-  --color-app-background: #f8fafc;
+  --color-app-primary: #09366d;
+  --color-app-secondary: #00a6db;
+  --color-app-background: #f3f4f4;
   --color-app-surface: #ffffff;
-  --color-app-text: #1e293b;
-  --color-app-muted: #94a3b8;
+  --color-app-muted: #3576a7;
+  --color-app-green: #009933;
+  --color-app-red: #e15e60;
 }
 
 @theme inline {
