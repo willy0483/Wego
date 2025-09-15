@@ -6,14 +6,18 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <section>
-      <article className=" min-h-[calc(100vh-80px)] flex flex-col justify-center items-center text-center px-4">
-        <h1 className="text-2xl font-semibold text-app-text">Welcome</h1>
-        <p className="text-app-muted max-w-md">
-          This is a simple starter template. Edit
-          <code> src/routes/index.tsx</code> to get started.
-        </p>
-      </article>
+    <section className="flex w-full min-h-[calc(100vh-80px)] items-stretch justify-stretch">
+      <figure className="flex-1 flex m-0 p-0 relative">
+        <img
+          src="bg/Slides.png"
+          alt="background image forside"
+          className="w-full h-full object-cover object-center flex-1"
+        />
+        <figcaption className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+          {/* todo: animate text */}
+          <h1 className="text-black text-6xl">Vi gør byen grønnere</h1>
+        </figcaption>
+      </figure>
     </section>
   );
 }
