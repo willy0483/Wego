@@ -22,7 +22,7 @@ const Nav = () => {
             to={path}
             key={index}
             activeProps={{
-              className: "border-b-app-primary border-b-2",
+              className: "border-b-app-secondary border-b-2",
             }}
             className={`capitalize font-medium transition-all py-4 px-2 group`}
           >
