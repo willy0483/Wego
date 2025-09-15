@@ -31,7 +31,7 @@ const Nav = () => {
         );
       })}
 
-      <button className="capitalize font-medium transition-all py-4 group">
+      <button className="capitalize font-medium transition-all py-4 group hover:cursor-pointer">
         <span className="group-hover:bg-gray-300 py-2 rounded">
           Sådan virker det
         </span>
