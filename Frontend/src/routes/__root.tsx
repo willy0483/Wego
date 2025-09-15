@@ -1,6 +1,7 @@
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import NotFound from "@/components/notFound";
+import Sådanirkerdet from "@/components/sådanirkerdet";
 import { Toaster } from "@/components/ui/sonner";
 import { AuthProvider } from "@/providers/authProvider";
 import { createRootRoute, HeadContent, Outlet } from "@tanstack/react-router";
@@ -19,6 +20,10 @@ export const Route = createRootRoute({
         </section>
         <Toaster />
         <Footer />
+
+        {/* modules */}
+        <Sådanirkerdet />
+
         {/* Add dev tools for router */}
         <TanStackRouterDevtools />
       </AuthProvider>

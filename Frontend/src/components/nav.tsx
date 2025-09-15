@@ -1,4 +1,4 @@
-import { useAuth } from "@/lib/utils";
+import { useAuth, useModule } from "@/lib/utils";
 import { Link } from "@tanstack/react-router";
 
 const links = [
@@ -11,6 +11,8 @@ const links = [
 const Nav = () => {
   const { loginData } = useAuth();
   const isLoggedIn = !!loginData;
+
+  const { isWorksOpen, setIsWorksOpen } = useModule();
 
   return (
     <nav className="flex gap-8  text-text">
@@ -31,8 +33,11 @@ const Nav = () => {
         );
       })}
 
-      <button className="capitalize font-medium transition-all py-4 group hover:cursor-pointer">
-        <span className="group-hover:bg-gray-300 py-2 rounded">
+      <button
+        onClick={() => setIsWorksOpen(!isWorksOpen)}
+        className="capitalize font-medium transition-all py-4 group hover:cursor-pointer"
+      >
+        <span className="group-hover:bg-gray-300 py-2 px-4 rounded">
           Sådan virker det
         </span>
       </button>

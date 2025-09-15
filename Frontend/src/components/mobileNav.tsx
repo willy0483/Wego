@@ -3,7 +3,7 @@ import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "./ui/sheet";
 import { useAuth } from "@/lib/utils";
 import { CiMenuFries } from "react-icons/ci";
 import { toast } from "sonner";
-import { House, Search } from "lucide-react";
+import { Book, House, Search } from "lucide-react";
 
 const Nav = () => {
   const location = useLocation();
@@ -73,6 +73,27 @@ const Nav = () => {
               </Link>
             );
           })}
+
+          {isLoggedIn && (
+            <Link
+              to="/min-side"
+              className={`flex items-center w-full relative max-w-[180px] py-2 px-2 rounded-md hover:text-app-primary transition-colors duration-150 ${pathname === "/min-side" ? "text-app-primary font-semibold" : "text-black"}`}
+            >
+              <span
+                className={`text-2xl mr-3 ${pathname === "/min-side" ? "text-app-primary" : "text-black"}`}
+              >
+                <Book />
+              </span>
+              <span
+                className={`text-lg flex-1 ${pathname === "/min-side" ? "text-app-primary" : "text-black"}`}
+              >
+                Min Side
+              </span>
+              {pathname === "/min-side" && (
+                <span className="absolute left-0 bottom-0 w-full h-0.5 bg-app-primary rounded" />
+              )}
+            </Link>
+          )}
 
           {isLoggedIn ? (
             <button

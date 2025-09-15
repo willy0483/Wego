@@ -7,6 +7,7 @@ import "./App.css";
 
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
+import ModuleProvider from "./providers/moduleProvider";
 
 // Create a new router instance
 const router = createRouter({ routeTree, notFoundMode: "root" });
@@ -22,10 +23,12 @@ const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-      {/* Add dev tools for query */}
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+    <ModuleProvider>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        {/* Add dev tools for query */}
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </ModuleProvider>
   </StrictMode>
 );
