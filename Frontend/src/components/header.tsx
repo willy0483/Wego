@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import MobileNav from "./mobileNav";
 import Nav from "./nav";
-import { Button } from "./ui/button";
 import { useAuth } from "@/lib/utils";
 
 const Header = () => {
@@ -15,42 +14,36 @@ const Header = () => {
   };
 
   return (
-    <header className=" h-[80px] px-4 sm:px-0 container mx-auto bg-app-surface text-app-text flex items-center justify-between">
-      {/* logo */}
-      <Link to={"/"}>
-        <h1 className="text-4xl font-semibold">
-          Website<span className="text-app-accent">.</span>
-        </h1>
+    <header className=" h-[80px] px-4 sm:px-0 container mx-auto bg-white text-app-text flex items-center justify-between">
+      <Link to={"/"} className="flex md:hidden">
+        <img src="icons/wego-logo.svg" alt="wego logo" />
       </Link>
 
       {/* desktop nav */}
       <div className="hidden md:flex items-center gap-8">
+        {/* logo */}
+        <Link to={"/"}>
+          <img src="icons/wego-logo.svg" alt="wego logo" />
+        </Link>
         <Nav />
+      </div>
 
-        {!isLoggedIn ? (
-          <div>
-            <Link to={"/login"}>
-              <button
-                aria-label="Login"
-                className="px-5 hover:cursor-pointer py-2 rounded-lg font-semibold bg-app-primary text-white hover:bg-app-accent transition-colors shadow-sm border border-app-primary hover:border-app-accent"
-              >
-                Login
-              </button>
-            </Link>
-            <Link to={"/signup"}>
-              <button
-                aria-label="Signup"
-                className="px-5 hover:cursor-pointer py-2 rounded-lg font-semibold bg-app-surface text-app-primary border border-app-primary hover:bg-app-primary hover:text-white hover:border-app-accent transition-colors shadow-sm ml-2"
-              >
-                Sign Up
-              </button>
-            </Link>
+      <div className="hidden md:flex">
+        {isLoggedIn ? (
+          <div className=" flex gap-2 items-center">
+            {loginData.user.firstname}
+            <button
+              className="bg-transparent rounded-xl hover:cursor-pointer text-black border-2 border-app-primary py-2 px-4"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
           </div>
         ) : (
           <Link to="/login">
-            <Button aria-label="Logout" onClick={handleLogout}>
-              Logout
-            </Button>
+            <button className="bg-app-primary rounded-xl hover:cursor-pointer text-white py-2 px-4">
+              Login
+            </button>
           </Link>
         )}
       </div>

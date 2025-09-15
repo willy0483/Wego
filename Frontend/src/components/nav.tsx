@@ -1,47 +1,55 @@
-"use client";
-
+import { useAuth } from "@/lib/utils";
 import { Link } from "@tanstack/react-router";
 
 const links = [
   {
-    name: "home",
-    path: "/",
-  },
-  {
-    name: "products",
-    path: "/products",
-  },
-  {
-    name: "resume",
-    path: "/resume",
-  },
-  {
-    name: "work",
-    path: "/work",
-  },
-  {
-    name: "contact",
-    path: "/contact",
+    name: "Find et lift",
+    path: "/lift",
   },
 ];
 
 const Nav = () => {
+  const { loginData } = useAuth();
+  const isLoggedIn = !!loginData;
+
   return (
     <nav className="flex gap-8  text-text">
-      {links.map((link, index) => {
+      {links.map(({ name, path }, index) => {
         return (
           <Link
-            to={link.path}
+            to={path}
             key={index}
             activeProps={{
-              className: "text-app-primary",
+              className: "border-b-app-primary border-b-2",
             }}
-            className={`capitalize font-medium transition-all`}
+            className={`capitalize font-medium transition-all py-4 px-2 group`}
           >
-            {link.name}
+            <span className="group-hover:bg-gray-300 py-2 px-4 rounded">
+              {name}
+            </span>
           </Link>
         );
       })}
+
+      <button className="capitalize font-medium transition-all py-4 group">
+        <span className="group-hover:bg-gray-300 py-2 rounded">
+          Sådan virker det
+        </span>
+      </button>
+
+      {isLoggedIn && (
+        <Link
+          to={"/min-side"}
+          activeProps={{
+            className: "border-b-app-primary border-b-2",
+          }}
+          className={`capitalize font-medium transition-all group py-4`}
+        >
+          <span className="group-hover:bg-gray-300 py-2 px-4 rounded">
+            Min Side
+          </span>
+        </Link>
+      )}
     </nav>
   );
 };

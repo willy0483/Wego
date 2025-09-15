@@ -11,8 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as authRouteRouteImport } from './routes/(auth)/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ProductsIndexRouteImport } from './routes/products/index'
-import { Route as ProductsProductRouteImport } from './routes/products/$product'
+import { Route as LiftIndexRouteImport } from './routes/lift/index'
 import { Route as authSignupIndexRouteImport } from './routes/(auth)/signup/index'
 import { Route as authLoginIndexRouteImport } from './routes/(auth)/login/index'
 
@@ -25,14 +24,9 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProductsIndexRoute = ProductsIndexRouteImport.update({
-  id: '/products/',
-  path: '/products/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProductsProductRoute = ProductsProductRouteImport.update({
-  id: '/products/$product',
-  path: '/products/$product',
+const LiftIndexRoute = LiftIndexRouteImport.update({
+  id: '/lift/',
+  path: '/lift/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const authSignupIndexRoute = authSignupIndexRouteImport.update({
@@ -48,15 +42,13 @@ const authLoginIndexRoute = authLoginIndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof authRouteRouteWithChildren
-  '/products/$product': typeof ProductsProductRoute
-  '/products': typeof ProductsIndexRoute
+  '/lift': typeof LiftIndexRoute
   '/login': typeof authLoginIndexRoute
   '/signup': typeof authSignupIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof authRouteRouteWithChildren
-  '/products/$product': typeof ProductsProductRoute
-  '/products': typeof ProductsIndexRoute
+  '/lift': typeof LiftIndexRoute
   '/login': typeof authLoginIndexRoute
   '/signup': typeof authSignupIndexRoute
 }
@@ -64,22 +56,20 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/(auth)': typeof authRouteRouteWithChildren
-  '/products/$product': typeof ProductsProductRoute
-  '/products/': typeof ProductsIndexRoute
+  '/lift/': typeof LiftIndexRoute
   '/(auth)/login/': typeof authLoginIndexRoute
   '/(auth)/signup/': typeof authSignupIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/products/$product' | '/products' | '/login' | '/signup'
+  fullPaths: '/' | '/lift' | '/login' | '/signup'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/products/$product' | '/products' | '/login' | '/signup'
+  to: '/' | '/lift' | '/login' | '/signup'
   id:
     | '__root__'
     | '/'
     | '/(auth)'
-    | '/products/$product'
-    | '/products/'
+    | '/lift/'
     | '/(auth)/login/'
     | '/(auth)/signup/'
   fileRoutesById: FileRoutesById
@@ -87,8 +77,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   authRouteRoute: typeof authRouteRouteWithChildren
-  ProductsProductRoute: typeof ProductsProductRoute
-  ProductsIndexRoute: typeof ProductsIndexRoute
+  LiftIndexRoute: typeof LiftIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -107,18 +96,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/products/': {
-      id: '/products/'
-      path: '/products'
-      fullPath: '/products'
-      preLoaderRoute: typeof ProductsIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/products/$product': {
-      id: '/products/$product'
-      path: '/products/$product'
-      fullPath: '/products/$product'
-      preLoaderRoute: typeof ProductsProductRouteImport
+    '/lift/': {
+      id: '/lift/'
+      path: '/lift'
+      fullPath: '/lift'
+      preLoaderRoute: typeof LiftIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/(auth)/signup/': {
@@ -155,8 +137,7 @@ const authRouteRouteWithChildren = authRouteRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   authRouteRoute: authRouteRouteWithChildren,
-  ProductsProductRoute: ProductsProductRoute,
-  ProductsIndexRoute: ProductsIndexRoute,
+  LiftIndexRoute: LiftIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

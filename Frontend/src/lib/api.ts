@@ -1,14 +1,8 @@
 import { BACKEND_URL } from "./constants";
 
 export const api = {
-  async get(url: string, slug?: string, id?: number, accessToken?: string) {
-    let endpoint = `${BACKEND_URL}/${url}`;
-    if (slug) {
-      endpoint = `${BACKEND_URL}/${url}/${slug}`;
-    }
-    if (id) {
-      endpoint = `${BACKEND_URL}/${url}/${id}`;
-    }
+  async get<T = unknown>(url: string, accessToken?: string): Promise<T> {
+    const endpoint = `${BACKEND_URL}/${url}`;
     // get data
     const res = await fetch(endpoint, {
       headers: {
