@@ -1,6 +1,7 @@
 import Card from "@/components/card";
 import { Spinner } from "@/components/spinner";
 import { useTrips } from "@/lib/query";
+import { useFilter } from "@/lib/utils";
 import { createFileRoute } from "@tanstack/react-router";
 import { isToday, isTomorrow } from "date-fns";
 import { Calendar } from "lucide-react";
@@ -17,14 +18,59 @@ export const Route = createFileRoute("/lift/")({
 function RouteComponent() {
   const { data: trips, isError, error, refetch } = useTrips();
 
-  const todayTrips = trips.filter((trip) =>
+  const {
+    seats,
+    luggage,
+    isComfort,
+    isAnimal,
+    isChildren,
+    isMusik,
+    isSmoking,
+    location,
+    destination,
+  } = useFilter();
+
+  const filteredTrips = trips?.filter((trip) => {
+    const isSeats = trip.seatsTotal == seats;
+
+    const isLuggageMatch =
+      luggage.length === 0 || luggage.includes(trip.bagSizeId);
+
+    const isLocationMatch =
+      trip.cityDeparture.includes(location) ||
+      trip.addressDeparture.includes(location);
+
+    const isDestinationMatch =
+      trip.cityDestination.includes(destination) ||
+      trip.addressDestination.includes(destination);
+
+    const isComfortMatch = !isComfort || trip.hasComfort === true;
+    const isAnimalMatch = !isAnimal || trip.allowPets === true;
+    const isChildrenMatch = !isChildren || trip.allowChildren === true;
+    const isMusikMatch = !isMusik || trip.allowMusic === true;
+    const isSmokingMatch = !isSmoking || trip.allowSmoking === true;
+
+    return (
+      isSeats &&
+      isLuggageMatch &&
+      isComfortMatch &&
+      isAnimalMatch &&
+      isChildrenMatch &&
+      isMusikMatch &&
+      isSmokingMatch &&
+      isLocationMatch &&
+      isDestinationMatch
+    );
+  });
+
+  const todayTrips = filteredTrips.filter((trip) =>
     isToday(new Date(trip.departureDate))
   );
-  const tomorrowTrips = trips.filter((trip) =>
+  const tomorrowTrips = filteredTrips.filter((trip) =>
     isTomorrow(new Date(trip.departureDate))
   );
 
-  const otherTrips = trips.filter(
+  const otherTrips = filteredTrips.filter(
     (trip) =>
       !isToday(new Date(trip.departureDate)) &&
       !isTomorrow(new Date(trip.departureDate))
@@ -53,7 +99,7 @@ function RouteComponent() {
 
   return (
     <>
-      {trips.length === 0 ? (
+      {filteredTrips.length === 0 ? (
         <div className="flex flex-col items-center justify-center min-h-[calc(100vh-260px)] w-full">
           <div className="bg-app-surface p-6 rounded-xl shadow text-app-text border border-app-secondary w-full max-w-md">
             <p className="text-app-secondary mb-2 font-semibold text-center text-lg">
@@ -70,8 +116,8 @@ function RouteComponent() {
           {todayTrips.length > 0 && (
             <>
               <div className="my-4 flex flex-col gap-4">
-                {todayTrips.map((item) => (
-                  <Card {...item} />
+                {todayTrips.map((item, index) => (
+                  <Card key={index} {...item} />
                 ))}
               </div>
             </>
@@ -83,8 +129,8 @@ function RouteComponent() {
                 <h3 className="font-bold text-lg">I morgen</h3>
               </div>
               <div className="my-4 flex flex-col gap-4">
-                {tomorrowTrips.map((item) => (
-                  <Card {...item} />
+                {tomorrowTrips.map((item, index) => (
+                  <Card key={index} {...item} />
                 ))}
               </div>
             </>
@@ -93,8 +139,8 @@ function RouteComponent() {
             <>
               <h3 className="font-bold text-lg mb-2">Senere</h3>
               <div className="my-4 flex flex-col gap-4">
-                {otherTrips.map((item) => (
-                  <Card {...item} />
+                {otherTrips.map((item, index) => (
+                  <Card key={index} {...item} />
                 ))}
               </div>
             </>

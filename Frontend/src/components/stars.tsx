@@ -5,9 +5,9 @@ const Stars = ({ avgStars }: { avgStars: number }) => {
     <div className="flex ">
       {Array.from({ length: 6 }).map((_, i) =>
         i < avgStars ? (
-          <Star fill="#F3CC0B" stroke="none" />
+          <Star key={i} fill="#F3CC0B" stroke="none" />
         ) : (
-          <Star fill="#DFE4E7" stroke="none" />
+          <Star key={i} fill="#DFE4E7" stroke="none" />
         )
       )}
     </div>

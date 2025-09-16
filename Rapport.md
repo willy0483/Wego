@@ -24,7 +24,7 @@
 
 ### Vurdering af egen indsats og gennemførelse
 
-jeg startede med at læse opgaven igennem og lave issues og så satte jeg min template op med backend og derefter gik jeg i gang med min issues som header footer og forside har haft nogen småproblemer med style og images
+jeg startede med at læse opgaven igennem og lave issues og så satte jeg min template op med backend og derefter gik jeg i gang med min issues som header footer og forside har haft nogen småproblemer med style og images efter det lavede jeg find et lift med filter som tog mig noget tid at finde ud af med dato men jeg fandt en npm-pakke der kunne hjælpe efter lave jeg søg filter hvor jeg bruge et temp useState til at holde på text uden at søg
 
 ### Argumentation for de valg du har truffet under løsningen af opgaven
 
@@ -49,3 +49,7 @@ jeg vil gerne fortælle om hvorfor jeg har brugt tanstack og nogen af de ting de
 ### Day1
 
 ![day1](./Frontend/public/bilag/day1.png)
+
+### Day2
+
+![day2](./Frontend/public/bilag/day2.png)
