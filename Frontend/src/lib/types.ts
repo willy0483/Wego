@@ -73,3 +73,34 @@ export interface T_SådanVirkerDet {
   title: string;
   content: string;
 }
+
+export interface T_Trips {
+  id: number;
+  departureDate: string;
+  cityDeparture: string;
+  addressDeparture: string;
+  cityDestination: string;
+  addressDestination: string;
+  pricePerSeat: string;
+  bagSizeId: number;
+  useFerry: boolean;
+  isElectric: boolean;
+  hasComfort: boolean;
+  allowChildren: boolean;
+  allowSmoking: boolean;
+  allowMusic: boolean;
+  allowPets: boolean;
+  seatsTotal: number;
+  seatsBooked: number;
+  user: T_User;
+}
+
+export interface T_User {
+  id: number;
+  firstname: string;
+  lastname: string;
+  imageUrl: string;
+  numReviews: number;
+  numStars: number;
+  avgStars: number;
+}

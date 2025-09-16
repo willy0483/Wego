@@ -14,7 +14,7 @@ const Header = () => {
   };
 
   return (
-    <header className=" h-[80px] px-4 sm:px-0 container mx-auto bg-white text-app-text flex items-center justify-between">
+    <header className="h-[80px] px-10 bg-white text-app-text flex items-center justify-between">
       <Link to={"/"} className="flex md:hidden">
         <img src="icons/wego-logo.svg" alt="wego logo" />
       </Link>
