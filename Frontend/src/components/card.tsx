@@ -1,85 +1,73 @@
-import { api } from "@/lib/api";
-import type { T_Product } from "@/lib/types";
-import { useAuth } from "@/lib/utils";
-import { createProductsQueryOptions } from "@/queryOptions/createProductsQueryOptions.ts";
-import { useQueryClient } from "@tanstack/react-query";
-import { Link } from "@tanstack/react-router";
-import { Heart } from "lucide-react";
-import { toast } from "sonner";
+import type { T_Trips } from "@/lib/types";
+import Stars from "./stars";
+import { formatDate } from "./formatDate";
+import Departure from "./departure";
+import Destination from "./destination";
+import Seats from "./seats";
 
 const Card = ({
-  title,
-  imageUrl,
-  description,
-  slug,
-  favorites,
-  id,
-  numFavorites,
-}: T_Product) => {
-  const { loginData } = useAuth();
-
-  const queryClient = useQueryClient();
-
-  // Show if the user has favorited this item
-  const isFavorited = favorites.some(
-    (fav) => fav.userId === loginData?.user.id
-  );
-
-  const onFavorited = async () => {
-    if (!loginData) return;
-    if (isFavorited) {
-      await api.delete(`favorites/${id}`, loginData.accessToken);
-    } else {
-      await api.post("favorites", { productId: id }, loginData.accessToken);
-    }
-    queryClient.invalidateQueries({
-      queryKey: createProductsQueryOptions().queryKey,
-    });
-  };
-
-  const handleClick = () => {
-    toast.error("Du skal være logget ind for at kunne tilføje favoritter.", {
-      id: "noLogin",
-    });
-  };
-
+  user,
+  departureDate,
+  useFerry,
+  isElectric,
+  addressDeparture,
+  cityDeparture,
+  addressDestination,
+  cityDestination,
+  pricePerSeat,
+  seatsBooked,
+  seatsTotal,
+}: T_Trips) => {
   return (
-    <figure className="bg-app-surface rounded-xl shadow-md overflow-hidden flex flex-col w-full max-w-sm mx-auto">
-      <img
-        src={imageUrl}
-        alt={title}
-        className="w-full h-48 object-cover object-center bg-app-background"
-        fetchPriority="high"
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption className="p-4 flex flex-col gap-2 justify-center md:flex-1">
-        <p className="text-xl font-bold text-app-primary mb-1">{title}</p>
-        <article className="text-gray-600 text-sm">{description}</article>
-        <div className="flex justify-between items-center mt-2">
-          <Link to="/products/$product" params={{ product: slug }}>
-            <button
-              aria-label="Read mere"
-              className="hover:cursor-pointer px-4 py-2 bg-green-gold text-white rounded bg-app-primary hover:bg-app-accent transition"
-            >
-              Læs mere
-            </button>
-          </Link>
-          <div className="flex gap-2 items-center justify-center">
-            <p>{numFavorites}</p>
-            {loginData ? (
-              <Heart
-                fill={isFavorited ? "#fc0303" : "none"}
-                onClick={onFavorited}
-                className="cursor-pointer"
+    <section className="grid grid-cols-[220px_1fr_220px] bg-white rounded-xl shadow p-0 items-center overflow-hidden">
+      <figure className="flex flex-col justify-center items-center border-r-2 px-4 py-6 h-full">
+        <img
+          src={user.imageUrl}
+          alt={`${user.imageUrl} user image`}
+          className="rounded-full w-16 h-16 object-cover mb-2"
+        />
+        <figcaption>
+          <h3 className="text-center font-medium text-base mb-1">
+            {user.firstname}
+          </h3>
+          <Stars avgStars={user.avgStars} />
+        </figcaption>
+      </figure>
+
+      <div className="flex flex-col gap-2 px-4 py-4">
+        <div className="flex justify-between items-center mb-2">
+          <span className="font-bold text-lg">{formatDate(departureDate)}</span>
+          <div className="flex gap-2">
+            {useFerry && (
+              <img src="icons/Ship.svg" alt="Ship image" className="w-6 h-6" />
+            )}
+            {isElectric && (
+              <img
+                src="icons/Lightning.svg"
+                alt="Lightning image"
+                className="w-6 h-6"
               />
-            ) : (
-              <Heart onClick={handleClick} />
             )}
           </div>
         </div>
-      </figcaption>
-    </figure>
+        <Departure
+          addressDeparture={addressDeparture}
+          cityDeparture={cityDeparture}
+        />
+        <Destination
+          addressDestination={addressDestination}
+          cityDestination={cityDestination}
+        />
+      </div>
+
+      <div className="border-l-2 py-8 h-full flex flex-col items-center justify-center">
+        <div className="font-bold text-2xl text-center mb-8">
+          DKK {pricePerSeat}
+        </div>
+        <hr className="w-full border-t-2 border-gray-200 mb-8" />
+        <Seats seatsBooked={seatsBooked} seatsTotal={seatsTotal} />
+      </div>
+    </section>
   );
 };
 export default Card;

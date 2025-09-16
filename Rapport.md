@@ -37,6 +37,9 @@ Jeg har bruge shadcn og tailwind til nogen komponter <https://ui.shadcn.com/docs
 jeg har bruge swiperjs til at lave silder
 <https://swiperjs.com/>
 
+jeh har brugt date-fns til dato
+<https://www.npmjs.com/package/date-fns>
+
 ### Fremhævelse af punkter til bedømmelse
 
 jeg vil gerne fortælle om hvorfor jeg har brugt tanstack og nogen af de ting den kan og med dens dev tools og cache

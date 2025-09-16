@@ -15,7 +15,7 @@ const Nav = () => {
   const { isWorksOpen, setIsWorksOpen } = useModule();
 
   return (
-    <nav className="flex gap-8  text-text">
+    <nav className="flex items-center gap-8 text-text">
       {links.map(({ name, path }, index) => {
         return (
           <Link

@@ -9,12 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as LiftRouteRouteImport } from './routes/lift/route'
 import { Route as authRouteRouteImport } from './routes/(auth)/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LiftIndexRouteImport } from './routes/lift/index'
 import { Route as authSignupIndexRouteImport } from './routes/(auth)/signup/index'
 import { Route as authLoginIndexRouteImport } from './routes/(auth)/login/index'
 
+const LiftRouteRoute = LiftRouteRouteImport.update({
+  id: '/lift',
+  path: '/lift',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const authRouteRoute = authRouteRouteImport.update({
   id: '/(auth)',
   getParentRoute: () => rootRouteImport,
@@ -25,9 +31,9 @@ const IndexRoute = IndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const LiftIndexRoute = LiftIndexRouteImport.update({
-  id: '/lift/',
-  path: '/lift/',
-  getParentRoute: () => rootRouteImport,
+  id: '/',
+  path: '/',
+  getParentRoute: () => LiftRouteRoute,
 } as any)
 const authSignupIndexRoute = authSignupIndexRouteImport.update({
   id: '/signup/',
@@ -42,7 +48,8 @@ const authLoginIndexRoute = authLoginIndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof authRouteRouteWithChildren
-  '/lift': typeof LiftIndexRoute
+  '/lift': typeof LiftRouteRouteWithChildren
+  '/lift/': typeof LiftIndexRoute
   '/login': typeof authLoginIndexRoute
   '/signup': typeof authSignupIndexRoute
 }
@@ -56,19 +63,21 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/(auth)': typeof authRouteRouteWithChildren
+  '/lift': typeof LiftRouteRouteWithChildren
   '/lift/': typeof LiftIndexRoute
   '/(auth)/login/': typeof authLoginIndexRoute
   '/(auth)/signup/': typeof authSignupIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/lift' | '/login' | '/signup'
+  fullPaths: '/' | '/lift' | '/lift/' | '/login' | '/signup'
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/lift' | '/login' | '/signup'
   id:
     | '__root__'
     | '/'
     | '/(auth)'
+    | '/lift'
     | '/lift/'
     | '/(auth)/login/'
     | '/(auth)/signup/'
@@ -77,11 +86,18 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   authRouteRoute: typeof authRouteRouteWithChildren
-  LiftIndexRoute: typeof LiftIndexRoute
+  LiftRouteRoute: typeof LiftRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/lift': {
+      id: '/lift'
+      path: '/lift'
+      fullPath: '/lift'
+      preLoaderRoute: typeof LiftRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/(auth)': {
       id: '/(auth)'
       path: '/'
@@ -98,10 +114,10 @@ declare module '@tanstack/react-router' {
     }
     '/lift/': {
       id: '/lift/'
-      path: '/lift'
-      fullPath: '/lift'
+      path: '/'
+      fullPath: '/lift/'
       preLoaderRoute: typeof LiftIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof LiftRouteRoute
     }
     '/(auth)/signup/': {
       id: '/(auth)/signup/'
@@ -134,10 +150,22 @@ const authRouteRouteWithChildren = authRouteRoute._addFileChildren(
   authRouteRouteChildren,
 )
 
+interface LiftRouteRouteChildren {
+  LiftIndexRoute: typeof LiftIndexRoute
+}
+
+const LiftRouteRouteChildren: LiftRouteRouteChildren = {
+  LiftIndexRoute: LiftIndexRoute,
+}
+
+const LiftRouteRouteWithChildren = LiftRouteRoute._addFileChildren(
+  LiftRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   authRouteRoute: authRouteRouteWithChildren,
-  LiftIndexRoute: LiftIndexRoute,
+  LiftRouteRoute: LiftRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
