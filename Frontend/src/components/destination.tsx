@@ -8,7 +8,7 @@ const Destination = ({
   cityDestination,
 }: DestinationProps) => {
   return (
-    <figure className="flex  gap-3">
+    <figure className="flex items-center  md:items-start px-2 py-2 gap-3 border-2  rounded-4xl md:border-0 md:rounded-none md:mx-0">
       <img
         src="icons/Destination.svg"
         alt="Destination icon"
