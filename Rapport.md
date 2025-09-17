@@ -24,7 +24,7 @@
 
 ### Vurdering af egen indsats og gennemførelse
 
-jeg startede med at læse opgaven igennem og lave issues og så satte jeg min template op med backend og derefter gik jeg i gang med min issues som header footer og forside har haft nogen småproblemer med style og images efter det lavede jeg find et lift med filter som tog mig noget tid at finde ud af med dato men jeg fandt en npm-pakke der kunne hjælpe efter lave jeg søg filter hvor jeg bruge et temp useState til at holde på text uden at søg
+jeg startede med at læse opgaven igennem og lave issues og så satte jeg min template op med backend og derefter gik jeg i gang med min issues som header footer og forside har haft nogen småproblemer med style og images efter det lavede jeg find et lift med filter som tog mig noget tid at finde ud af med dato men jeg fandt en npm-pakke der kunne hjælpe efter lave jeg søg filter hvor jeg bruge et temp useState til at holde på text uden at søg har lavet så image kommer ud fra backend med reviewer derefter gik jeg til lift details og review med booking
 
 ### Argumentation for de valg du har truffet under løsningen af opgaven
 
@@ -33,6 +33,10 @@ Jeg har ændret designet på login så den har sin egen side og det samme gælde
 lavert så filter også er der til mobil
 
 har lavet så man kan vælge flere bagage en eller flere
+
+der er kun en type BRÆNDSTOFTYPE så bliver kun er den elektrisk eller ikke
+
+har lavet lidt om på booking design så det passer lidt mere til mobil og desktop
 
 ### Redegørelse af de forskellige kodeelementer i prøven
 

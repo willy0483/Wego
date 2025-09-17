@@ -104,3 +104,97 @@ export interface T_User {
   numStars: number;
   avgStars: number;
 }
+
+export interface T_Trips_Details {
+  id: number;
+  userId: number;
+  departureDate: string;
+  addressDeparture: string;
+  cityDeparture: string;
+  addressDestination: string;
+  cityDestination: string;
+  routeDeviation: number;
+  seatsTotal: number;
+  pricePerSeat: string;
+  bagSizeId: number;
+  comment: string;
+  allowChildren: boolean;
+  allowSmoking: boolean;
+  allowMusic: boolean;
+  allowPets: boolean;
+  hasComfort: boolean;
+  useFerry: boolean;
+  isElectric: boolean;
+  createdAt: string;
+  user: T_User;
+  bagsize: Bagsize;
+  bookings: Booking[];
+  seatsBooked: number;
+}
+export interface Bagsize {
+  name: string;
+  description: string;
+  iconUrl: string;
+}
+
+export interface Booking {
+  id: number;
+  numSeats: number;
+  user: User2;
+}
+
+export interface User2 {
+  id: number;
+  firstname: string;
+  imageUrl: string;
+}
+
+export interface T_Reviewer {
+  reviewerId: number;
+  numStars: number;
+  comment: string;
+  reviewer: Reviewer;
+  createdAt: string;
+  id: number;
+}
+
+export interface Reviewer {
+  firstname: string;
+  lastname: string;
+  imageUrl: string;
+}
+
+export type ReviewFormState =
+  | {
+      error?: {
+        comment?: string[];
+        numStars?: string[];
+      };
+      message?: string;
+      success?: boolean;
+    }
+  | undefined;
+
+export const ReviewFormSchema = z.object({
+  comment: z.string().min(1, { message: "Må ikke være tom" }),
+  numStars: z.number(),
+  reviewedUserId: z.number(),
+});
+
+export type BookFormState =
+  | {
+      error?: {
+        tripId?: string[];
+        comment?: string[];
+        numSeats?: string[];
+      };
+      message?: string;
+      success?: boolean;
+    }
+  | undefined;
+
+export const BookFormSchema = z.object({
+  tripId: z.number(),
+  comment: z.string().min(1, { message: "Må ikke være tom" }),
+  numSeats: z.number().min(1, { message: "Du skal vælge mindst 1 sæde." }),
+});

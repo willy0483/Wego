@@ -2,7 +2,7 @@ import Card from "@/components/card";
 import { Spinner } from "@/components/spinner";
 import { useTrips } from "@/lib/query";
 import { useFilter } from "@/lib/utils";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { isToday, isTomorrow } from "date-fns";
 import { Calendar } from "lucide-react";
 
@@ -123,8 +123,20 @@ function RouteComponent() {
           {todayTrips.length > 0 && (
             <>
               <div className="my-4 flex flex-col gap-4">
-                {todayTrips.map((item, index) => (
-                  <Card key={index} {...item} />
+                {todayTrips.map((item) => (
+                  <div className="w-full" key={item.id}>
+                    <div className="hidden md:block w-full">
+                      <Link
+                        to="/lift/$listId"
+                        params={{ listId: item.id.toString() }}
+                      >
+                        <Card {...item} />
+                      </Link>
+                    </div>
+                    <div className="block md:hidden w-full">
+                      <Card {...item} />
+                    </div>
+                  </div>
                 ))}
               </div>
             </>
@@ -136,8 +148,20 @@ function RouteComponent() {
                 <h3 className="font-bold text-lg">I morgen</h3>
               </div>
               <div className="my-4 flex flex-col gap-4">
-                {tomorrowTrips.map((item, index) => (
-                  <Card key={index} {...item} />
+                {tomorrowTrips.map((item) => (
+                  <div className="w-full" key={item.id}>
+                    <div className="hidden md:block w-full">
+                      <Link
+                        to="/lift/$listId"
+                        params={{ listId: item.id.toString() }}
+                      >
+                        <Card {...item} />
+                      </Link>
+                    </div>
+                    <div className="block md:hidden w-full">
+                      <Card {...item} />
+                    </div>
+                  </div>
                 ))}
               </div>
             </>
@@ -146,8 +170,20 @@ function RouteComponent() {
             <>
               <h3 className="font-bold text-lg mb-2 mx-5 md:mx-0">Senere</h3>
               <div className="my-4 flex flex-col gap-4">
-                {otherTrips.map((item, index) => (
-                  <Card key={index} {...item} />
+                {otherTrips.map((item) => (
+                  <div className="w-full" key={item.id}>
+                    <div className="hidden md:block w-full">
+                      <Link
+                        to="/lift/$listId"
+                        params={{ listId: item.id.toString() }}
+                      >
+                        <Card {...item} />
+                      </Link>
+                    </div>
+                    <div className="block md:hidden w-full">
+                      <Card {...item} />
+                    </div>
+                  </div>
                 ))}
               </div>
             </>

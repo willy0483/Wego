@@ -1,5 +1,13 @@
 import { BACKEND_URL } from "./constants";
-import { LoginFormSchema, SignupFormSchema, type FormState } from "./types";
+import {
+  BookFormSchema,
+  LoginFormSchema,
+  ReviewFormSchema,
+  SignupFormSchema,
+  type BookFormState,
+  type FormState,
+  type ReviewFormState,
+} from "./types";
 
 export const login = async (
   _state: FormState,
@@ -87,6 +95,92 @@ export const signup = async (
         response.status === 409
           ? "The user already existed!"
           : response.statusText,
+    };
+  }
+};
+
+export const review = async (
+  _state: ReviewFormState,
+  formData: FormData,
+  accessToken?: string
+) => {
+  const validatedFields = ReviewFormSchema.safeParse({
+    comment: formData.get("comment"),
+    numStars: Number(formData.get("numStars")),
+    reviewedUserId: Number(formData.get("reviewedUserId")),
+  });
+
+  if (!validatedFields.success) {
+    const fieldErrors = validatedFields.error.flatten().fieldErrors;
+    return {
+      error: {
+        comment: fieldErrors.comment,
+        numStars: fieldErrors.numStars,
+      },
+    };
+  }
+
+  const response = await fetch(`${BACKEND_URL}/reviews`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify({
+      comment: validatedFields.data.comment,
+      numStars: validatedFields.data.numStars,
+      reviewedUserId: validatedFields.data.reviewedUserId,
+    }),
+  });
+
+  if (response.ok) {
+    return { success: true };
+  } else {
+    return {
+      message: response.statusText,
+    };
+  }
+};
+
+export const book = async (
+  _state: BookFormState,
+  formData: FormData,
+  accessToken?: string
+) => {
+  const validatedFields = BookFormSchema.safeParse({
+    tripId: Number(formData.get("tripId")),
+    comment: formData.get("comment"),
+    numSeats: Number(formData.get("numSeats")),
+  });
+
+  if (!validatedFields.success) {
+    const fieldErrors = validatedFields.error.flatten().fieldErrors;
+    return {
+      error: {
+        comment: fieldErrors.comment,
+        numSeats: fieldErrors.numSeats,
+      },
+    };
+  }
+
+  const response = await fetch(`${BACKEND_URL}/bookings`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify({
+      tripId: validatedFields.data.tripId,
+      comment: validatedFields.data.comment,
+      numSeats: validatedFields.data.numSeats,
+    }),
+  });
+
+  if (response.ok) {
+    return { success: true };
+  } else {
+    return {
+      message: response.statusText,
     };
   }
 };

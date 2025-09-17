@@ -1,14 +1,28 @@
 import { useFilter } from "@/lib/utils";
+import { useLocation, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 
 const MobilFilterNav = () => {
-  const { setLocation, setDestination } = useFilter();
-  const [tempLocation, setTempLocation] = useState<string>("");
-  const [tempDestination, setTempDestination] = useState<string>("");
+  const { setLocation, setDestination, location, destination } = useFilter();
+  const [tempLocation, setTempLocation] = useState<string>(location || "");
+  const [tempDestination, setTempDestination] = useState<string>(
+    destination || ""
+  );
+
+  const locations = useLocation();
+  const pathName = locations.pathname;
+
+  const navigate = useNavigate();
 
   const handleSøg = () => {
     setLocation(tempLocation);
     setDestination(tempDestination);
+
+    if (pathName !== "/lift") {
+      navigate({
+        to: "/lift",
+      });
+    }
   };
 
   return (

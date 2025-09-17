@@ -13,7 +13,8 @@ import { Route as LiftRouteRouteImport } from './routes/lift/route'
 import { Route as authRouteRouteImport } from './routes/(auth)/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LiftIndexRouteImport } from './routes/lift/index'
-import { Route as LiftIdRouteImport } from './routes/lift/$id'
+import { Route as LiftListIdRouteImport } from './routes/lift/$listId'
+import { Route as BookBookIdRouteImport } from './routes/book/$bookId'
 import { Route as authSignupIndexRouteImport } from './routes/(auth)/signup/index'
 import { Route as authLoginIndexRouteImport } from './routes/(auth)/login/index'
 
@@ -36,10 +37,15 @@ const LiftIndexRoute = LiftIndexRouteImport.update({
   path: '/',
   getParentRoute: () => LiftRouteRoute,
 } as any)
-const LiftIdRoute = LiftIdRouteImport.update({
-  id: '/$id',
-  path: '/$id',
+const LiftListIdRoute = LiftListIdRouteImport.update({
+  id: '/$listId',
+  path: '/$listId',
   getParentRoute: () => LiftRouteRoute,
+} as any)
+const BookBookIdRoute = BookBookIdRouteImport.update({
+  id: '/book/$bookId',
+  path: '/book/$bookId',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const authSignupIndexRoute = authSignupIndexRouteImport.update({
   id: '/signup/',
@@ -55,14 +61,16 @@ const authLoginIndexRoute = authLoginIndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof authRouteRouteWithChildren
   '/lift': typeof LiftRouteRouteWithChildren
-  '/lift/$id': typeof LiftIdRoute
+  '/book/$bookId': typeof BookBookIdRoute
+  '/lift/$listId': typeof LiftListIdRoute
   '/lift/': typeof LiftIndexRoute
   '/login': typeof authLoginIndexRoute
   '/signup': typeof authSignupIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof authRouteRouteWithChildren
-  '/lift/$id': typeof LiftIdRoute
+  '/book/$bookId': typeof BookBookIdRoute
+  '/lift/$listId': typeof LiftListIdRoute
   '/lift': typeof LiftIndexRoute
   '/login': typeof authLoginIndexRoute
   '/signup': typeof authSignupIndexRoute
@@ -72,22 +80,31 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/(auth)': typeof authRouteRouteWithChildren
   '/lift': typeof LiftRouteRouteWithChildren
-  '/lift/$id': typeof LiftIdRoute
+  '/book/$bookId': typeof BookBookIdRoute
+  '/lift/$listId': typeof LiftListIdRoute
   '/lift/': typeof LiftIndexRoute
   '/(auth)/login/': typeof authLoginIndexRoute
   '/(auth)/signup/': typeof authSignupIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/lift' | '/lift/$id' | '/lift/' | '/login' | '/signup'
+  fullPaths:
+    | '/'
+    | '/lift'
+    | '/book/$bookId'
+    | '/lift/$listId'
+    | '/lift/'
+    | '/login'
+    | '/signup'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/lift/$id' | '/lift' | '/login' | '/signup'
+  to: '/' | '/book/$bookId' | '/lift/$listId' | '/lift' | '/login' | '/signup'
   id:
     | '__root__'
     | '/'
     | '/(auth)'
     | '/lift'
-    | '/lift/$id'
+    | '/book/$bookId'
+    | '/lift/$listId'
     | '/lift/'
     | '/(auth)/login/'
     | '/(auth)/signup/'
@@ -97,6 +114,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   authRouteRoute: typeof authRouteRouteWithChildren
   LiftRouteRoute: typeof LiftRouteRouteWithChildren
+  BookBookIdRoute: typeof BookBookIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -129,12 +147,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LiftIndexRouteImport
       parentRoute: typeof LiftRouteRoute
     }
-    '/lift/$id': {
-      id: '/lift/$id'
-      path: '/$id'
-      fullPath: '/lift/$id'
-      preLoaderRoute: typeof LiftIdRouteImport
+    '/lift/$listId': {
+      id: '/lift/$listId'
+      path: '/$listId'
+      fullPath: '/lift/$listId'
+      preLoaderRoute: typeof LiftListIdRouteImport
       parentRoute: typeof LiftRouteRoute
+    }
+    '/book/$bookId': {
+      id: '/book/$bookId'
+      path: '/book/$bookId'
+      fullPath: '/book/$bookId'
+      preLoaderRoute: typeof BookBookIdRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/(auth)/signup/': {
       id: '/(auth)/signup/'
@@ -168,12 +193,12 @@ const authRouteRouteWithChildren = authRouteRoute._addFileChildren(
 )
 
 interface LiftRouteRouteChildren {
-  LiftIdRoute: typeof LiftIdRoute
+  LiftListIdRoute: typeof LiftListIdRoute
   LiftIndexRoute: typeof LiftIndexRoute
 }
 
 const LiftRouteRouteChildren: LiftRouteRouteChildren = {
-  LiftIdRoute: LiftIdRoute,
+  LiftListIdRoute: LiftListIdRoute,
   LiftIndexRoute: LiftIndexRoute,
 }
 
@@ -185,6 +210,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   authRouteRoute: authRouteRouteWithChildren,
   LiftRouteRoute: LiftRouteRouteWithChildren,
+  BookBookIdRoute: BookBookIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

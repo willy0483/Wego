@@ -11,7 +11,7 @@ const Seats = ({
         <span
           key={i}
           className={`inline-block w-3 h-3 rounded-full mx-1 ${
-            i < seatsBooked ? "bg-green-400" : "bg-red-400"
+            i < seatsBooked ? "bg-red-400" : "bg-green-400"
           }`}
         ></span>
       ))}

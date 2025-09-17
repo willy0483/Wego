@@ -3,7 +3,7 @@ import { Star } from "lucide-react";
 const Stars = ({ avgStars }: { avgStars: number }) => {
   return (
     <div className="flex ">
-      {Array.from({ length: 6 }).map((_, i) =>
+      {Array.from({ length: 5 }).map((_, i) =>
         i < avgStars ? (
           <Star key={i} fill="#F3CC0B" stroke="none" />
         ) : (

@@ -9,7 +9,7 @@ const Footer = () => {
     >
       <figure>
         <img
-          src="bg/Footer.svg"
+          src="/bg/Footer.svg"
           alt="wego footer background"
           className="w-full m-0 min-h-28 object-cover"
         />

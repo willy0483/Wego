@@ -21,7 +21,7 @@ const FilterNav = () => {
       <div className="max-w-5xl mx-auto py-4 flex items-center gap-3">
         <div className="relative flex items-center gap-2 rounded-xl border border-gray-200 px-4 py-2 bg-white shadow-sm w-full h-12">
           <img
-            src="icons/Location.svg"
+            src="/icons/Location.svg"
             alt="Location icon"
             className="w-5 h-5 text-app-secondary"
           />
@@ -41,7 +41,7 @@ const FilterNav = () => {
           className="flex items-center justify-center w-36 h-12 rounded-xl bg-[#E6F9FE] mx-2 hover:cursor-pointer"
         >
           <img
-            src="icons/arrows-left-right-fill.svg"
+            src="/icons/arrows-left-right-fill.svg"
             alt="Arrows icon"
             className="w-6 h-6 text-app-secondary"
           />
@@ -49,7 +49,7 @@ const FilterNav = () => {
 
         <div className="relative flex items-center gap-2 rounded-xl border border-gray-200 px-4 py-2 bg-white shadow-sm w-full h-12">
           <img
-            src="icons/Destination.svg"
+            src="/icons/Destination.svg"
             alt="destination icon"
             className="w-5 h-5 text-app-secondary"
           />

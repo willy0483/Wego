@@ -1,6 +1,6 @@
-import { Request, Response } from 'express';
-import { prisma } from '../prisma.js';
-import { toBoolean } from '../utils/formatter.js';
+import { Request, Response } from "express";
+import { prisma } from "../prisma.js";
+import { toBoolean } from "../utils/formatter.js";
 
 export const getRecords = async (req: Request, res: Response) => {
   try {
@@ -9,7 +9,7 @@ export const getRecords = async (req: Request, res: Response) => {
     res.json(data);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Failed to fetch trips' });
+    res.status(500).json({ error: "Failed to fetch trips" });
   }
 };
 
@@ -17,18 +17,18 @@ export const getRecord = async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
     const data = await prisma.booking.findUnique({
-      where: { id: Number(id) }
+      where: { id: Number(id) },
     });
 
     res.json(data);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Failed to fetch trip' });
+    res.status(500).json({ error: "Failed to fetch trip" });
   }
 };
 
 export const getRecordsByUserId = async (req: Request, res: Response) => {
-  const userId = req.user?.id
+  const userId = req.user?.id;
   try {
     const data = await prisma.booking.findMany({
       where: {
@@ -36,15 +36,14 @@ export const getRecordsByUserId = async (req: Request, res: Response) => {
       },
       select: {
         tripId: true,
-        comment: true
-      }
-
+        comment: true,
+      },
     });
 
     res.json(data);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Failed to fetch trips' });
+    res.status(500).json({ error: "Failed to fetch trips" });
   }
 };
 
@@ -54,7 +53,7 @@ export const createRecord = async (req: Request, res: Response) => {
   const { tripId, comment, numSeats } = req.body;
 
   if (!tripId || !userId || !comment || !numSeats) {
-    res.status(400).json({ error: 'All fields are required' });
+    res.status(400).json({ error: "All fields are required" });
   }
 
   try {
@@ -63,13 +62,13 @@ export const createRecord = async (req: Request, res: Response) => {
         userId: Number(userId),
         tripId: Number(tripId),
         comment,
-        numSeats: Number(numSeats)
+        numSeats: Number(numSeats),
       },
     });
     res.status(201).json(trip);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Failed to create trip' });
+    res.status(500).json({ error: "Failed to create trip" });
   }
 };
 
@@ -79,9 +78,9 @@ export const deleteRecord = async (req: Request, res: Response) => {
     await prisma.booking.delete({
       where: { id: Number(id) },
     });
-    res.status(200).json({ message: 'Booking deleted' });
+    res.status(200).json({ message: "Booking deleted" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Failed to delete booking' });
+    res.status(500).json({ error: "Failed to delete booking" });
   }
 };

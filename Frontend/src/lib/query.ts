@@ -1,6 +1,12 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { api } from "./api";
-import type { T_Slides, T_SådanVirkerDet, T_Trips } from "./types";
+import type {
+  T_Reviewer,
+  T_Slides,
+  T_SådanVirkerDet,
+  T_Trips,
+  T_Trips_Details,
+} from "./types";
 
 export const useSlides = () =>
   useSuspenseQuery({
@@ -20,5 +26,19 @@ export const useTrips = () =>
   useSuspenseQuery({
     queryKey: ["Trips"],
     queryFn: () => api.get<T_Trips[]>(`trips`),
+    staleTime: 1000 * 60 * 5,
+  });
+
+export const useTripsDetails = (id: number) =>
+  useSuspenseQuery({
+    queryKey: ["Trips", id],
+    queryFn: () => api.get<T_Trips_Details>(`trips/${id}`),
+    staleTime: 1000 * 60 * 5,
+  });
+
+export const useReviewsbyUser = (id: number) =>
+  useSuspenseQuery({
+    queryKey: ["ReviewsByTrips", id],
+    queryFn: () => api.get<T_Reviewer[]>(`reviews/byUser/${id}`),
     staleTime: 1000 * 60 * 5,
   });
