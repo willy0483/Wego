@@ -119,7 +119,7 @@ function RouteComponent() {
         </div>
       ) : (
         <section>
-          <h2 className="font-bold text-2xl">Næste lift</h2>
+          <h2 className="font-bold text-2xl mx-5 md:mx-0">Næste lift</h2>
           {todayTrips.length > 0 && (
             <>
               <div className="my-4 flex flex-col gap-4">
@@ -131,7 +131,7 @@ function RouteComponent() {
           )}
           {tomorrowTrips.length > 0 && (
             <>
-              <div className="flex items-center gap-2 mb-2">
+              <div className="flex items-center gap-2 mb-2 mx-5 md:mx-0">
                 <Calendar className="w-5 h-5 mr-1" />
                 <h3 className="font-bold text-lg">I morgen</h3>
               </div>
@@ -144,7 +144,7 @@ function RouteComponent() {
           )}
           {otherTrips.length > 0 && (
             <>
-              <h3 className="font-bold text-lg mb-2">Senere</h3>
+              <h3 className="font-bold text-lg mb-2 mx-5 md:mx-0">Senere</h3>
               <div className="my-4 flex flex-col gap-4">
                 {otherTrips.map((item, index) => (
                   <Card key={index} {...item} />

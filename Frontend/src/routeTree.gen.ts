@@ -13,6 +13,7 @@ import { Route as LiftRouteRouteImport } from './routes/lift/route'
 import { Route as authRouteRouteImport } from './routes/(auth)/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LiftIndexRouteImport } from './routes/lift/index'
+import { Route as LiftIdRouteImport } from './routes/lift/$id'
 import { Route as authSignupIndexRouteImport } from './routes/(auth)/signup/index'
 import { Route as authLoginIndexRouteImport } from './routes/(auth)/login/index'
 
@@ -35,6 +36,11 @@ const LiftIndexRoute = LiftIndexRouteImport.update({
   path: '/',
   getParentRoute: () => LiftRouteRoute,
 } as any)
+const LiftIdRoute = LiftIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => LiftRouteRoute,
+} as any)
 const authSignupIndexRoute = authSignupIndexRouteImport.update({
   id: '/signup/',
   path: '/signup/',
@@ -49,12 +55,14 @@ const authLoginIndexRoute = authLoginIndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof authRouteRouteWithChildren
   '/lift': typeof LiftRouteRouteWithChildren
+  '/lift/$id': typeof LiftIdRoute
   '/lift/': typeof LiftIndexRoute
   '/login': typeof authLoginIndexRoute
   '/signup': typeof authSignupIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof authRouteRouteWithChildren
+  '/lift/$id': typeof LiftIdRoute
   '/lift': typeof LiftIndexRoute
   '/login': typeof authLoginIndexRoute
   '/signup': typeof authSignupIndexRoute
@@ -64,20 +72,22 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/(auth)': typeof authRouteRouteWithChildren
   '/lift': typeof LiftRouteRouteWithChildren
+  '/lift/$id': typeof LiftIdRoute
   '/lift/': typeof LiftIndexRoute
   '/(auth)/login/': typeof authLoginIndexRoute
   '/(auth)/signup/': typeof authSignupIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/lift' | '/lift/' | '/login' | '/signup'
+  fullPaths: '/' | '/lift' | '/lift/$id' | '/lift/' | '/login' | '/signup'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/lift' | '/login' | '/signup'
+  to: '/' | '/lift/$id' | '/lift' | '/login' | '/signup'
   id:
     | '__root__'
     | '/'
     | '/(auth)'
     | '/lift'
+    | '/lift/$id'
     | '/lift/'
     | '/(auth)/login/'
     | '/(auth)/signup/'
@@ -119,6 +129,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LiftIndexRouteImport
       parentRoute: typeof LiftRouteRoute
     }
+    '/lift/$id': {
+      id: '/lift/$id'
+      path: '/$id'
+      fullPath: '/lift/$id'
+      preLoaderRoute: typeof LiftIdRouteImport
+      parentRoute: typeof LiftRouteRoute
+    }
     '/(auth)/signup/': {
       id: '/(auth)/signup/'
       path: '/signup'
@@ -151,10 +168,12 @@ const authRouteRouteWithChildren = authRouteRoute._addFileChildren(
 )
 
 interface LiftRouteRouteChildren {
+  LiftIdRoute: typeof LiftIdRoute
   LiftIndexRoute: typeof LiftIndexRoute
 }
 
 const LiftRouteRouteChildren: LiftRouteRouteChildren = {
+  LiftIdRoute: LiftIdRoute,
   LiftIndexRoute: LiftIndexRoute,
 }
 

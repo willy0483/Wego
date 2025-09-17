@@ -4,6 +4,7 @@ import { formatDate } from "./formatDate";
 import Departure from "./departure";
 import Destination from "./destination";
 import Seats from "./seats";
+import { Clock } from "lucide-react";
 
 const Card = ({
   user,
@@ -19,24 +20,36 @@ const Card = ({
   seatsTotal,
 }: T_Trips) => {
   return (
-    <section className="grid grid-cols-[220px_1fr_220px] bg-white rounded-xl shadow p-0 items-center overflow-hidden">
-      <figure className="flex flex-col justify-center items-center border-r-2 px-4 py-6 h-full">
+    <section className="bg-white rounded-xl shadow p-0 overflow-hidden grid grid-cols-1 md:grid-cols-[220px_1fr_220px] items-stretch m-4 md:m-0">
+      <figure className="order-3 md:order-1 flex items-center md:flex-col md:justify-center md:items-center md:border-r-2 px-4 py-4 md:py-6 gap-3 md:gap-0 h-full">
         <img
           src={user.imageUrl}
           alt={`${user.imageUrl} user image`}
-          className="rounded-full w-16 h-16 object-cover mb-2"
+          className="rounded-full w-12 h-12 md:w-16 md:h-16 object-cover md:mb-2"
         />
-        <figcaption>
-          <h3 className="text-center font-medium text-base mb-1">
-            {user.firstname}
-          </h3>
-          <Stars avgStars={user.avgStars} />
+        <figcaption className="flex-1 flex justify-between">
+          <div>
+            <h3 className="text-left md:text-center font-medium text-base mb-1">
+              {user.firstname}
+            </h3>
+            <Stars avgStars={user.avgStars} />
+          </div>
+          <button className="bg-app-secondary w-12 flex justify-center items-center rounded-full md:hidden hover:cursor-pointer">
+            <img
+              src="icons/arrowHead.svg"
+              alt="arrowhead icon"
+              className="w-5 h-5"
+            />
+          </button>
         </figcaption>
       </figure>
 
-      <div className="flex flex-col gap-2 px-4 py-4">
+      <div className="order-1 md:order-2 flex flex-col gap-2 px-4 py-4">
         <div className="flex justify-between items-center mb-2">
-          <span className="font-bold text-lg">{formatDate(departureDate)}</span>
+          <span className="font-bold text-base md:text-lg flex justify-center items-center gap-2">
+            <Clock className="w-5 h-5 xl:hidden" />
+            {formatDate(departureDate)}
+          </span>
           <div className="flex gap-2">
             {useFerry && (
               <img src="icons/Ship.svg" alt="Ship image" className="w-6 h-6" />
@@ -48,6 +61,7 @@ const Card = ({
                 className="w-6 h-6"
               />
             )}
+            <img src="icons/car.svg" alt="car icon" className="md:hidden" />
           </div>
         </div>
         <Departure
@@ -60,12 +74,11 @@ const Card = ({
         />
       </div>
 
-      <div className="border-l-2 py-8 h-full flex flex-col items-center justify-center">
-        <div className="font-bold text-2xl text-center mb-8">
+      <div className="order-2 md:order-3 md:border-l-2 md:py-8 h-full flex md:flex-col items-center justify-between md:justify-center px-4 py-3 gap-4 border-2 mx-4 rounded-4xl md:border-0 md:rounded-none">
+        <Seats seatsBooked={seatsBooked} seatsTotal={seatsTotal} />
+        <div className="font-bold text-xl md:text-2xl text-right md:text-center">
           DKK {pricePerSeat}
         </div>
-        <hr className="w-full border-t-2 border-gray-200 mb-8" />
-        <Seats seatsBooked={seatsBooked} seatsTotal={seatsTotal} />
       </div>
     </section>
   );
