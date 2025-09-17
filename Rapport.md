@@ -48,6 +48,9 @@ jeg har bruge swiperjs til at lave silder
 jeh har brugt date-fns til dato
 <https://www.npmjs.com/package/date-fns>
 
+jeh har brugt react-simple-star-rating til starrating ved review
+<https://www.npmjs.com/package/react-simple-star-rating>
+
 ### Fremhævelse af punkter til bedømmelse
 
 jeg vil gerne fortælle om hvorfor jeg har brugt tanstack og nogen af de ting den kan og med dens dev tools og cache
