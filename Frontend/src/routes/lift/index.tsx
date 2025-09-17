@@ -37,12 +37,20 @@ function RouteComponent() {
       luggage.length === 0 || luggage.includes(trip.bagSizeId);
 
     const isLocationMatch =
-      trip.cityDeparture.includes(location) ||
-      trip.addressDeparture.includes(location);
+      trip.cityDeparture
+        .toLocaleLowerCase()
+        .includes(location.toLocaleLowerCase()) ||
+      trip.addressDeparture
+        .toLocaleLowerCase()
+        .includes(location.toLocaleLowerCase());
 
     const isDestinationMatch =
-      trip.cityDestination.includes(destination) ||
-      trip.addressDestination.includes(destination);
+      trip.cityDestination
+        .toLocaleLowerCase()
+        .includes(destination.toLocaleLowerCase()) ||
+      trip.addressDestination
+        .toLocaleLowerCase()
+        .includes(destination.toLocaleLowerCase());
 
     const isComfortMatch = !isComfort || trip.hasComfort === true;
     const isAnimalMatch = !isAnimal || trip.allowPets === true;
@@ -87,7 +95,6 @@ function RouteComponent() {
             Error: {error.message}
           </p>
           <button
-            aria-label="Refetch the api"
             className="bg-app-primary text-white px-4 hover:cursor-pointer py-2 rounded transition-colors w-full font-semibold"
             onClick={() => refetch()}
           >
@@ -112,7 +119,7 @@ function RouteComponent() {
         </div>
       ) : (
         <section>
-          <h2 className="font-bold text-xl">Næste lift</h2>
+          <h2 className="font-bold text-2xl">Næste lift</h2>
           {todayTrips.length > 0 && (
             <>
               <div className="my-4 flex flex-col gap-4">

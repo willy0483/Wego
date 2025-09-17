@@ -1,5 +1,5 @@
-import { Request, Response } from 'express';
-import { prisma } from '../prisma.js';
+import { Request, Response } from "express";
+import { prisma } from "../prisma.js";
 
 export const getRecords = async (req: Request, res: Response) => {
   const reviewerId = req.user?.id;
@@ -8,13 +8,13 @@ export const getRecords = async (req: Request, res: Response) => {
     const data = await prisma.review.findMany({
       where: {
         reviewerId: Number(reviewerId),
-      }
+      },
     });
 
     res.json(data);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Failed to fetch trips' });
+    res.status(500).json({ error: "Failed to fetch trips" });
   }
 };
 
@@ -23,17 +23,17 @@ export const getRecord = async (req: Request, res: Response) => {
 
   try {
     const data = await prisma.review.findUnique({
-      where: { id: Number(id) }
+      where: { id: Number(id) },
     });
     res.json(data);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Failed to fetch trips' });
+    res.status(500).json({ error: "Failed to fetch trips" });
   }
 };
 
 export const getRecordsByUserId = async (req: Request, res: Response) => {
-  const { userId } = req.params
+  const { userId } = req.params;
   try {
     const data = await prisma.review.findMany({
       where: {
@@ -43,14 +43,19 @@ export const getRecordsByUserId = async (req: Request, res: Response) => {
         reviewerId: true,
         numStars: true,
         comment: true,
+        reviewer: {
+          select: {
+            firstname: true,
+            lastname: true,
+          },
+        },
       },
-
     });
 
     res.json(data);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Failed to fetch trips' });
+    res.status(500).json({ error: "Failed to fetch trips" });
   }
 };
 
@@ -60,7 +65,7 @@ export const createRecord = async (req: Request, res: Response) => {
   const { reviewedUserId, comment, numStars } = req.body;
 
   if (!reviewerId || !reviewedUserId || !comment || !numStars) {
-    res.status(400).json({ error: 'All fields are required' });
+    res.status(400).json({ error: "All fields are required" });
   }
 
   try {
@@ -69,13 +74,13 @@ export const createRecord = async (req: Request, res: Response) => {
         reviewerId: Number(reviewerId),
         reviewedUserId: Number(reviewedUserId),
         comment,
-        numStars: Number(numStars)
+        numStars: Number(numStars),
       },
     });
     res.status(201).json(data);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Failed to create review' });
+    res.status(500).json({ error: "Failed to create review" });
   }
 };
 
@@ -87,7 +92,7 @@ export const updateRecord = async (req: Request, res: Response) => {
     const dataToUpdate: any = {
       numStars: Number(numStars),
       comment,
-      reviewedUserId: Number(reviewedUserId)
+      reviewedUserId: Number(reviewedUserId),
     };
 
     const data = await prisma.review.update({
@@ -98,7 +103,7 @@ export const updateRecord = async (req: Request, res: Response) => {
     res.status(200).json(data);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Failed to update review' });
+    res.status(500).json({ error: "Failed to update review" });
   }
 };
 
@@ -108,9 +113,9 @@ export const deleteRecord = async (req: Request, res: Response) => {
     await prisma.review.delete({
       where: { id: Number(id) },
     });
-    res.status(200).json({ message: 'Review deleted' });
+    res.status(200).json({ message: "Review deleted" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Failed to delete review' });
+    res.status(500).json({ error: "Failed to delete review" });
   }
 };
