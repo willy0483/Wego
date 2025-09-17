@@ -43,10 +43,13 @@ export const getRecordsByUserId = async (req: Request, res: Response) => {
         reviewerId: true,
         numStars: true,
         comment: true,
+        createdAt: true,
+        id: true,
         reviewer: {
           select: {
             firstname: true,
             lastname: true,
+            imageUrl: true,
           },
         },
       },
@@ -64,8 +67,19 @@ export const createRecord = async (req: Request, res: Response) => {
 
   const { reviewedUserId, comment, numStars } = req.body;
 
-  if (!reviewerId || !reviewedUserId || !comment || !numStars) {
-    res.status(400).json({ error: "All fields are required" });
+  // Validate required fields; allow 0 stars but disallow undefined/null
+  if (
+    reviewerId == null ||
+    reviewedUserId == null ||
+    comment == null ||
+    numStars == null
+  ) {
+    return res.status(400).json({ error: "All fields are required" });
+  }
+
+  const parsedNumStars = Number(numStars);
+  if (!Number.isFinite(parsedNumStars) || parsedNumStars < 0 || parsedNumStars > 5) {
+    return res.status(400).json({ error: "numStars must be a number between 0 and 5" });
   }
 
   try {
@@ -74,7 +88,7 @@ export const createRecord = async (req: Request, res: Response) => {
         reviewerId: Number(reviewerId),
         reviewedUserId: Number(reviewedUserId),
         comment,
-        numStars: Number(numStars),
+        numStars: parsedNumStars,
       },
     });
     res.status(201).json(data);

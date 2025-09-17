@@ -5,6 +5,7 @@ import Departure from "./departure";
 import Destination from "./destination";
 import Seats from "./seats";
 import { Clock } from "lucide-react";
+import { useNavigate } from "@tanstack/react-router";
 
 const Card = ({
   user,
@@ -18,7 +19,16 @@ const Card = ({
   pricePerSeat,
   seatsBooked,
   seatsTotal,
+  id,
 }: T_Trips) => {
+  const navigate = useNavigate({ from: "/lift" });
+
+  const handleClick = (id: number) => {
+    navigate({
+      to: "$listId",
+      params: { listId: id.toString() },
+    });
+  };
   return (
     <section className="bg-white rounded-xl shadow p-0 overflow-hidden grid grid-cols-1 md:grid-cols-[220px_1fr_220px] items-stretch m-4 md:m-0">
       <figure className="order-3 md:order-1 flex items-center md:flex-col md:justify-center md:items-center md:border-r-2 px-4 py-4 md:py-6 gap-3 md:gap-0 h-full">
@@ -34,7 +44,10 @@ const Card = ({
             </h3>
             <Stars avgStars={user.avgStars} />
           </div>
-          <button className="bg-app-secondary w-12 flex justify-center items-center rounded-full md:hidden hover:cursor-pointer">
+          <button
+            className="bg-app-secondary w-12 flex justify-center items-center rounded-full md:hidden hover:cursor-pointer"
+            onClick={() => handleClick(id)}
+          >
             <img
               src="icons/arrowHead.svg"
               alt="arrowhead icon"

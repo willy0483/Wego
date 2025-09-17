@@ -1,5 +1,5 @@
 import { useAuth, useModule } from "@/lib/utils";
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 
 const links = [
   {
@@ -14,6 +14,9 @@ const Nav = () => {
 
   const { isWorksOpen, setIsWorksOpen } = useModule();
 
+  const location = useLocation();
+  const pathname = location.pathname;
+
   return (
     <nav className="flex items-center gap-8 text-text">
       {links.map(({ name, path }, index) => {
@@ -21,10 +24,7 @@ const Nav = () => {
           <Link
             to={path}
             key={index}
-            activeProps={{
-              className: "border-b-app-secondary border-b-2",
-            }}
-            className={`capitalize font-medium transition-all py-4 px-2 group`}
+            className={`capitalize font-medium transition-all py-4 px-2 group ${pathname == path ? "border-b-app-secondary border-b-2" : ""}`}
           >
             <span className="group-hover:bg-gray-300 py-2 px-4 rounded">
               {name}

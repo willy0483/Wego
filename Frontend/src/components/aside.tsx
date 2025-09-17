@@ -2,19 +2,19 @@ import { useFilter } from "@/lib/utils";
 
 const luggageOptions = [
   {
-    icon: "icons/bagage/Small.svg",
+    icon: "/icons/bagage/Small.svg",
     fillIcon: "icons/bagage/Small-Fill.svg",
     text: "Lille",
     id: 1,
   },
   {
-    icon: "icons/bagage/Mellem.svg",
+    icon: "/icons/bagage/Mellem.svg",
     fillIcon: "icons/bagage/Mellem-Fill.svg",
     text: "Mellem",
     id: 2,
   },
   {
-    icon: "icons/bagage/Large.svg",
+    icon: "/icons/bagage/Large.svg",
     fillIcon: "icons/bagage/Large-Fill.svg",
 
     text: "Stor",

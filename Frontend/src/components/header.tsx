@@ -16,14 +16,13 @@ const Header = () => {
   return (
     <header className="h-[80px] px-10 bg-white text-app-text flex items-center justify-between border-b shadow">
       <Link to={"/"} className="flex md:hidden">
-        <img src="icons/wego-logo.svg" alt="wego logo" />
+        <img src="/icons/wego-logo.svg" alt="wego logo" />
       </Link>
 
       {/* desktop nav */}
       <div className="hidden md:flex items-center gap-8">
-        {/* logo */}
         <Link to={"/"}>
-          <img src="icons/wego-logo.svg" alt="wego logo" />
+          <img src="/icons/wego-logo.svg" alt="wego logo" />
         </Link>
         <Nav />
       </div>
