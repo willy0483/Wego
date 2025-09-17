@@ -45,11 +45,14 @@ Jeg har bruge shadcn og tailwind til nogen komponter <https://ui.shadcn.com/docs
 jeg har bruge swiperjs til at lave silder
 <https://swiperjs.com/>
 
-jeh har brugt date-fns til dato
+jeg har brugt date-fns til dato
 <https://www.npmjs.com/package/date-fns>
 
-jeh har brugt react-simple-star-rating til starrating ved review
+jeg har brugt react-simple-star-rating til starrating ved review
 <https://www.npmjs.com/package/react-simple-star-rating>
+
+text-animation som jeg har fra framer motion ui website
+<https://ui.indie-starter.dev/docs/text-animation>
 
 ### Fremhævelse af punkter til bedømmelse
 
@@ -64,3 +67,7 @@ jeg vil gerne fortælle om hvorfor jeg har brugt tanstack og nogen af de ting de
 ### Day2
 
 ![day2](./Frontend/public/bilag/day2.png)
+
+### Day 3
+
+![day3](./Frontend/public/bilag/day3.png)

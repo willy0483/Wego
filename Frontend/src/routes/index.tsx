@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import MobilFilterNav from "@/components/mobilFilterNav";
+import { GradualSpacing } from "@/components/gradual-spacing";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -40,8 +41,8 @@ function Index() {
                 alt={"slide image"}
               />
               <figcaption className="absolute top-1/2 left-1/2 z-20 w-full flex justify-center items-center transform -translate-x-1/2 -translate-y-1/2">
-                <h1 className="text-black text-4xl text-center px-4 py-2 hidden xl:flex">
-                  {text}
+                <h1 className="text-black text-center px-4 py-2 hidden xl:flex">
+                  <GradualSpacing text={text} />
                 </h1>
               </figcaption>
             </SwiperSlide>
