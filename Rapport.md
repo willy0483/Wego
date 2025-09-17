@@ -30,6 +30,10 @@ jeg startede med at læse opgaven igennem og lave issues og så satte jeg min te
 
 Jeg har ændret designet på login så den har sin egen side og det samme gælder signup.Mobilnav har dog ikke helt den samme stil men næsten
 
+lavert så filter også er der til mobil
+
+har lavet så man kan vælge flere bagage en eller flere
+
 ### Redegørelse af de forskellige kodeelementer i prøven
 
 Jeg har bruge shadcn og tailwind til nogen komponter <https://ui.shadcn.com/docs> kan ogsp see i ui mappe

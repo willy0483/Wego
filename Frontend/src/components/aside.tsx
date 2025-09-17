@@ -82,7 +82,7 @@ const Aside = () => {
   };
 
   return (
-    <aside className="bg-white rounded-2xl py-6 px-4 max-h-[600px]">
+    <aside className="bg-white rounded-2xl py-6 px-4 max-h-[600px] hidden xl:flex xl:flex-col">
       <section className="border-b-2 pb-4 mb-2">
         <div className="flex justify-between items-center mb-4">
           <p className="font-bold text-[18px]">Antal Pladser</p>

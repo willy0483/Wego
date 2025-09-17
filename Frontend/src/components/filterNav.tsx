@@ -17,9 +17,9 @@ const FilterNav = () => {
   };
 
   return (
-    <section className="bg-white">
+    <section className="bg-white hidden xl:flex">
       <div className="max-w-5xl mx-auto py-4 flex items-center gap-3">
-        <div className="relative flex items-center gap-2 rounded-full border border-gray-200 px-4 py-2 bg-white shadow-sm w-full h-12">
+        <div className="relative flex items-center gap-2 rounded-xl border border-gray-200 px-4 py-2 bg-white shadow-sm w-full h-12">
           <img
             src="icons/Location.svg"
             alt="Location icon"
@@ -27,7 +27,7 @@ const FilterNav = () => {
           />
           <input
             type="text"
-            id="location"
+            id="location-desktop"
             name="location"
             placeholder="Hvor fra?"
             value={tempLocation}
@@ -47,7 +47,7 @@ const FilterNav = () => {
           />
         </button>
 
-        <div className="relative flex items-center gap-2 rounded-full border border-gray-200 px-4 py-2 bg-white shadow-sm w-full h-12">
+        <div className="relative flex items-center gap-2 rounded-xl border border-gray-200 px-4 py-2 bg-white shadow-sm w-full h-12">
           <img
             src="icons/Destination.svg"
             alt="destination icon"
@@ -55,7 +55,7 @@ const FilterNav = () => {
           />
           <input
             type="text"
-            id="destination"
+            id="destination-desktop"
             name="destination"
             placeholder="Hvor til?"
             value={tempDestination}
