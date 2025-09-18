@@ -337,7 +337,7 @@ function RouteComponent() {
 
             <h4 className="text-[18px] my-4">Chaufføren:</h4>
             <div>
-              <figure className="flex gap-6 justify-center">
+              <figure className="flex gap-6 justify-center flex-col sm:flex-row items-center">
                 <img
                   src={user.imageUrl}
                   alt="user image"

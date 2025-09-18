@@ -10,6 +10,8 @@
 
 **Adgangskode** - password
 
+**host** - <https://wego-host.vercel.app/>
+
 ## Indholdsfortegnelse
 
 1. Vurdering af egen indsats og gennemførelse
@@ -24,7 +26,7 @@
 
 ### Vurdering af egen indsats og gennemførelse
 
-jeg startede med at læse opgaven igennem og lave issues og så satte jeg min template op med backend og derefter gik jeg i gang med min issues som header footer og forside har haft nogen småproblemer med style og images efter det lavede jeg find et lift med filter som tog mig noget tid at finde ud af med dato men jeg fandt en npm-pakke der kunne hjælpe efter lave jeg søg filter hvor jeg bruge et temp useState til at holde på text uden at søg har lavet så image kommer ud fra backend med reviewer derefter gik jeg til lift details og review med booking og så gik jeg til min side hvor der var mange problemer med logindata usequery men fandt en løsing og fik lavet pagination kun på senere og ikke dem som er i dag eller i morgen efter det lavet jeg signup og login og metadata
+jeg startede med at læse opgaven igennem og lave issues og så satte jeg min template op med backend og derefter gik jeg i gang med min issues som header footer og forside har haft nogen småproblemer med style og images efter det lavede jeg find et lift med filter som tog mig noget tid at finde ud af med dato men jeg fandt en npm-pakke der kunne hjælpe efter lave jeg søg filter hvor jeg bruge et temp useState til at holde på text uden at søg har lavet så image kommer ud fra backend med reviewer derefter gik jeg til lift details og review med booking og så gik jeg til min side hvor der var mange problemer med logindata usequery men fandt en løsing og fik lavet pagination kun på senere og ikke dem som er i dag eller i morgen efter det lavet jeg signup og login og metadata og host itcn og backend på render og frontend på vercel
 
 ### Argumentation for de valg du har truffet under løsningen af opgaven
 

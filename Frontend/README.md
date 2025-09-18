@@ -1,67 +1,35 @@
-# Web-Template: Your Starter Kit for Web Projects
+# Wego
 
-This is a web project template that helps you build awesome websites using modern tools. It's designed to be easy to use, especially if you're just starting out or want to quickly set up a new project.
+WeGo er en online service der tilbyder bæredygtig samkørsel til sine registrerede brugere. Som bruger kan man søge og booke ture med forskellige præferencer til en given destination.
 
-## What's Inside?
+## Hvad består Wego af?
 
-This template comes with some popular technologies:
+Wego er bygget med populære teknologier:
 
-- **React**: A library for building interactive parts of your website.
-- **TypeScript**: Helps you write code with fewer mistakes by checking it as you type.
-- **Vite**: A super fast tool that gets your project running quickly in development.
-- **Tanstack Router**: Helps you manage different pages and navigation in your app.
-- **Tanstack Query**: Makes managing data fetching, caching, and updating much easier.
-- **Tailwind CSS**: Makes styling your website much easier with ready-to-use classes.
+- **React**: Et bibliotek til at bygge interaktive dele af hjemmesiden.
+- **TypeScript**: Gør det nemmere at skrive fejlfri kode ved at tjekke den løbende.
+- **Vite**: Et lynhurtigt værktøj til at starte projektet op i udvikling.
+- **Tanstack Router**: Hjælper med at styre navigation og sider i appen.
+- **Tanstack Query**: Gør det nemt at hente, cache og opdatere data.
+- **Tailwind CSS**: Gør det let at style hjemmesiden med færdige klasser.
 
-## How to Get Started
+## Hvordan starter jeg
 
-Ready to start coding? Here's what you need to do:
-
-### 1. Get the Code
-
-First, you need to download this project to your computer:
+### 1. Hent project
 
 ```bash
-git clone https://github.com/your-username/web-template.git
-cd web-template
+git clone https://github.com/willy0483/Wego
+cd wego/frontend
 ```
 
-### 2. Install Dependencies
-
-Next, install all the necessary tools and libraries the project uses:
+### 2. Install dependencies
 
 ```bash
 npm install
 ```
 
-### 3. Run the Project
-
-Now you can start the development server. This will open your project in your web browser:
+### 3. Run dit project
 
 ```bash
 npm run dev
 ```
-
-### 4. Build for Production
-
-When your project is ready to be shared with the world, run this command to create optimized files:
-
-```bash
-npm run build
-```
-
-### 5. Preview Your Build
-
-Want to see how your optimized project looks before deploying? Use this:
-
-```bash
-npm run preview
-```
-
-## Basic Commands
-
-Here are the main commands you'll use:
-
-- `npm run dev`: Starts the project for development.
-- `npm run build`: Prepares your project for deployment.
-- `npm run preview`: Shows you the built project.
