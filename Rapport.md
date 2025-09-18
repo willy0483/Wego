@@ -73,3 +73,7 @@ jeg vil gerne fortælle om hvorfor jeg har brugt tanstack og nogen af de ting de
 ### Day 3
 
 ![day3](./Frontend/public/bilag/day3.png)
+
+### Day 4
+
+![day4](./Frontend/public/bilag/day4.png)
