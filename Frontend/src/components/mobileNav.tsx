@@ -76,7 +76,8 @@ const Nav = () => {
 
           {isLoggedIn && (
             <Link
-              to="/min-side"
+              to={"/min-side/$userId"}
+              params={{ userId: loginData.user.id.toString() }}
               className={`flex items-center w-full relative max-w-[180px] py-2 px-2 rounded-md hover:text-app-primary transition-colors duration-150 ${pathname === "/min-side" ? "text-app-primary font-semibold" : "text-black"}`}
             >
               <span

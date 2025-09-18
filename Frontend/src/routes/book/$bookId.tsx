@@ -53,9 +53,13 @@ function RouteComponent() {
       queryClient.invalidateQueries({
         queryKey: ["Trips"],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["Booking", loginData?.user.id],
+      });
+
       navigate({ to: "/lift/$listId", params: { listId: id } });
     }
-  }, [state?.success, id, navigate, data, queryClient]);
+  }, [state?.success, id, navigate, data, queryClient, loginData?.user.id]);
 
   return (
     <section className="container mx-auto mt-10 px-4">

@@ -44,7 +44,8 @@ const Nav = () => {
 
       {isLoggedIn && (
         <Link
-          to={"/min-side"}
+          to={"/min-side/$userId"}
+          params={{ userId: loginData.user.id.toString() }}
           activeProps={{
             className: "border-b-app-primary border-b-2",
           }}

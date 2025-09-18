@@ -198,3 +198,9 @@ export const BookFormSchema = z.object({
   comment: z.string().min(1, { message: "Må ikke være tom" }),
   numSeats: z.number().min(1, { message: "Du skal vælge mindst 1 sæde." }),
 });
+
+export interface T_Booking {
+  tripId: number;
+  comment: string;
+  id: number;
+}

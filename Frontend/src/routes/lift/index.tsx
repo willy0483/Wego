@@ -5,6 +5,8 @@ import { useFilter } from "@/lib/utils";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { isToday, isTomorrow } from "date-fns";
 import { Calendar } from "lucide-react";
+import { useEffect, useState } from "react";
+import ReactPaginate from "react-paginate";
 
 export const Route = createFileRoute("/lift/")({
   component: RouteComponent,
@@ -17,6 +19,7 @@ export const Route = createFileRoute("/lift/")({
 
 function RouteComponent() {
   const { data: trips, isError, error, refetch } = useTrips();
+  const [currentPage, setCurrentPage] = useState(0);
 
   const {
     seats,
@@ -71,6 +74,20 @@ function RouteComponent() {
     );
   });
 
+  useEffect(() => {
+    setCurrentPage(0);
+  }, [
+    seats,
+    luggage,
+    isComfort,
+    isAnimal,
+    isChildren,
+    isMusik,
+    isSmoking,
+    location,
+    destination,
+  ]);
+
   const todayTrips = filteredTrips.filter((trip) =>
     isToday(new Date(trip.departureDate))
   );
@@ -83,6 +100,19 @@ function RouteComponent() {
       !isToday(new Date(trip.departureDate)) &&
       !isTomorrow(new Date(trip.departureDate))
   );
+
+  /*
+    https://www.npmjs.com/package/react-paginate
+    code from react-paginate
+  */
+  const ITEMS_PER_PAGE = 3;
+  const pageCount = Math.ceil(otherTrips.length / ITEMS_PER_PAGE);
+  const offset = currentPage * ITEMS_PER_PAGE;
+  const currentItems = otherTrips.slice(offset, offset + ITEMS_PER_PAGE);
+
+  const handlePageClick = (event: { selected: number }) => {
+    setCurrentPage(event.selected);
+  };
 
   if (isError)
     return (
@@ -170,7 +200,7 @@ function RouteComponent() {
             <>
               <h3 className="font-bold text-lg mb-2 mx-5 md:mx-0">Senere</h3>
               <div className="my-4 flex flex-col gap-4">
-                {otherTrips.map((item) => (
+                {currentItems.map((item) => (
                   <div className="w-full" key={item.id}>
                     <div className="hidden md:block w-full">
                       <Link
@@ -185,6 +215,28 @@ function RouteComponent() {
                     </div>
                   </div>
                 ))}
+                {otherTrips.length > 3 && (
+                  <div className="flex justify-center my-8 w-full">
+                    <ReactPaginate
+                      breakLabel={"..."}
+                      nextLabel={"-›"}
+                      previousLabel={"‹-"}
+                      onPageChange={handlePageClick}
+                      pageRangeDisplayed={1}
+                      marginPagesDisplayed={1}
+                      pageCount={pageCount}
+                      renderOnZeroPageCount={null}
+                      containerClassName="flex flex-wrap gap-1 items-center select-none w-full justify-center"
+                      pageLinkClassName="px-2 py-1 rounded text-sm sm:text-base hover:cursor-pointer hover:bg-app-surface hover:text-app-accent transition-colors"
+                      activeClassName="text-app-accent font-bold"
+                      previousLinkClassName="px-2 py-1 rounded text-app-secondary text-sm sm:text-base hover:cursor-pointer hover:bg-app-surface transition-colors"
+                      nextLinkClassName="px-2 py-1 rounded text-app-secondary text-sm sm:text-base hover:cursor-pointer hover:bg-app-surface transition-colors"
+                      breakLinkClassName="px-2 py-1 text-app-muted text-sm sm:text-base"
+                      disabledClassName="opacity-40"
+                      forcePage={currentPage}
+                    />
+                  </div>
+                )}
               </div>
             </>
           )}
