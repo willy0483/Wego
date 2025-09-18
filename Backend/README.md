@@ -1,6 +1,6 @@
 # API til svendeprøve
 
-## Dette REST API er bygget i **Node.js**, **TypeScript**, **Express 5**, og **Prisma**.
+## Dette REST API er bygget i **Node.js**, **TypeScript**, **Express 5**, og **Prisma**
 
 ## 🛠 Teknologier
 

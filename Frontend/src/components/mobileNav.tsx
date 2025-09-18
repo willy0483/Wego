@@ -47,7 +47,6 @@ const Nav = () => {
           {loginData?.user.firstname}
         </h2>
 
-        {/* nav */}
         <nav className="flex flex-col justify-center items-center gap-8 mx-10 mt-40">
           {links.map(({ path, icon, name }, index) => {
             const isActive = path === pathname;
