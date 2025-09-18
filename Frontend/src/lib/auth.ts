@@ -57,21 +57,29 @@ export const signup = async (
   formData: FormData
 ): Promise<FormState> => {
   const validatedFields = SignupFormSchema.safeParse({
-    name: formData.get("name"),
+    firstname: formData.get("firstname"),
+    lastname: formData.get("lastname"),
     email: formData.get("email"),
     password: formData.get("password"),
+    description: formData.get("description"),
+    imageUrl: formData.get("image"),
   });
 
   if (!validatedFields.success) {
     const fieldErrors = validatedFields.error.flatten().fieldErrors;
     return {
       error: {
-        name: fieldErrors.name,
+        firstname: fieldErrors.firstname,
+        lastname: fieldErrors.lastname,
         email: fieldErrors.email,
         password: fieldErrors.password,
+        description: fieldErrors.description,
+        image: fieldErrors.imageUrl,
       },
     };
   }
+
+  console.log(validatedFields.data.imageUrl);
 
   const response = await fetch(`${BACKEND_URL}/users`, {
     method: "POST",
@@ -80,9 +88,7 @@ export const signup = async (
     },
     body: JSON.stringify({
       ...validatedFields.data,
-      image: "1",
       isActive: 1,
-      description: "test",
       refreshToken: "refreshToken",
     }),
   });

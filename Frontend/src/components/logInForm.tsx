@@ -19,6 +19,7 @@ export const LoginForm = () => {
   useEffect(() => {
     if (state?.success && state.session) {
       createSession(state.session);
+
       toast.success(`Welcome back, ${state.session.user.firstname}!`, {
         id: "login-success",
       });

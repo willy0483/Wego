@@ -17,6 +17,21 @@ export const Route = createFileRoute("/lift/$listId")({
       <Spinner />
     </div>
   ),
+  head: () => ({
+    meta: [
+      { title: "Lift detaljer - WeGo" },
+      {
+        name: "description",
+        content:
+          "WeGo er en online service der tilbyder bæredygtig samkørsel til sine registrerede brugere. Som bruger kan man søge og booke ture med forskellige præferencer til en given destination. Se alle lift på WeGo og støt klimaet!",
+      },
+      {
+        name: "keywords",
+        content:
+          "lift, bæredygtig, miljø, transport, transport, handel, tur, detaljer",
+      },
+    ],
+  }),
 });
 
 function RouteComponent() {
@@ -432,7 +447,7 @@ function RouteComponent() {
             </aside>
           </section>
 
-          <aside className="min-w-[300px] mx-auto px-2">
+          <aside className="min-w-[300px] mx-auto px-2 sticky top-20 self-start">
             <h2 className="font-medium my-4 text-xl">Pladser</h2>
             <div className="bg-white rounded-2xl">
               <div className="flex justify-between px-4">

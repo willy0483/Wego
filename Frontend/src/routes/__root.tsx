@@ -37,15 +37,15 @@ export const Route = createRootRoute({
       {
         name: "description",
         content:
-          "A modern, responsive web template built with React, Vite, and Tailwind CSS. Includes authentication, routing, and beautiful UI components.",
+          "WeGo er en online service der tilbyder bæredygtig samkørsel til sine registrerede brugere. Som bruger kan man søge og booke ture med forskellige præferencer til en given destination. ",
       },
       {
-        title: "My Template",
+        title: "Wego",
       },
       {
         name: "keywords",
         content:
-          "React, Vite, Tailwind, Tanstack, Template, Authentication, Routing, Web App, UI, Modern, Responsive",
+          "React, Vite, Tailwind, Tanstack, Template, Authentication, Routing, Web App, UI, Modern, Responsive,Tanstack ,Tanstack Query, Tanstack Router",
       },
       {
         name: "author",
@@ -57,13 +57,13 @@ export const Route = createRootRoute({
       },
       {
         name: "theme-color",
-        content: "#2563eb",
+        content: "#09366d",
       },
     ],
     links: [
       {
         rel: "icon",
-        href: "/icons/Template-White.png",
+        href: "/icons/wego-logo.svg",
       },
     ],
   }),

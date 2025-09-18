@@ -1,3 +1,4 @@
+import { Spinner } from "@/components/spinner";
 import {
   Select,
   SelectContent,
@@ -19,6 +20,25 @@ import { toast } from "sonner";
 
 export const Route = createFileRoute("/book/$bookId")({
   component: RouteComponent,
+  pendingComponent: () => (
+    <div className="flex flex-col justify-center items-center w-full min-h-[calc(100vh-80px)]">
+      <Spinner />
+    </div>
+  ),
+  head: () => ({
+    meta: [
+      { title: "Book et lift - WeGo" },
+      {
+        name: "description",
+        content:
+          "Book et lift på WeGo - en online service for bæredygtig samkørsel. Vælg antal pladser, skriv besked og betal nemt.",
+      },
+      {
+        name: "keywords",
+        content: "book, lift, transport, bæredygtig, WeGo, betaling, pladser",
+      },
+    ],
+  }),
 });
 
 function RouteComponent() {
@@ -65,7 +85,6 @@ function RouteComponent() {
     <section className="container mx-auto mt-10 px-4">
       <h2 className="mb-8 font-bold text-2xl">Book et lift</h2>
       <div className="xl:flex xl:gap-10">
-        {/* Booking Form */}
         <form
           action={action}
           className="bg-white rounded-2xl p-6 xl:w-2/3 mb-8 xl:mb-0"

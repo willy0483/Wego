@@ -6,12 +6,12 @@ export const Route = createFileRoute("/(auth)/signup/")({
   head: () => ({
     meta: [
       {
-        title: "SignUp | My Template",
+        title: "SignUp | Wego",
       },
       {
         name: "description",
         content:
-          "Create a new account to get started and unlock all the features of My Template. Join our community today!",
+          "Create a new account to get started and unlock all the features of Wego. Join our community today!",
       },
     ],
   }),
@@ -19,7 +19,7 @@ export const Route = createFileRoute("/(auth)/signup/")({
 
 function RouteComponent() {
   return (
-    <div className="p-8 w-96 flex flex-col justify-center items-center ">
+    <div className="p-8 w-96 flex flex-col justify-center items-center gap-10">
       <h1 className="text-center text-2xl font-bold text-app-primary">
         Sign Up
       </h1>
