@@ -15,6 +15,20 @@ export const Route = createFileRoute("/lift/")({
       <Spinner />
     </div>
   ),
+  head: () => ({
+    meta: [
+      { title: `Find et lift - WeGo` },
+      {
+        name: "description",
+        content:
+          "WeGo er en online service der tilbyder bæredygtig samkørsel til sine registrerede brugere. Som bruger kan man søge og booke ture med forskellige præferencer til en given destination. Se alle lift på WeGo og støt klimaet!",
+      },
+      {
+        name: "keywords",
+        content: `lift, bæredygtig, miljø, tur, transport, Wego`,
+      },
+    ],
+  }),
 });
 
 function RouteComponent() {

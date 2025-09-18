@@ -8,12 +8,12 @@ export const Route = createFileRoute("/(auth)/login/")({
   head: () => ({
     meta: [
       {
-        title: "Login | My Template",
+        title: "Login | Wego",
       },
       {
         name: "description",
         content:
-          "Login to access your account and explore the features of My Template.",
+          "Login to access your account and explore the features of Wego.",
       },
     ],
   }),

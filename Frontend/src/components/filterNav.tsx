@@ -17,7 +17,7 @@ const FilterNav = () => {
   };
 
   return (
-    <section className="bg-white hidden xl:flex">
+    <section className="bg-white hidden xl:flex sticky top-0 w-full z-20">
       <div className="max-w-5xl mx-auto py-4 flex items-center gap-3">
         <div className="relative flex items-center gap-2 rounded-xl border border-gray-200 px-4 py-2 bg-white shadow-sm w-full h-12">
           <img

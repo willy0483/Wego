@@ -3,6 +3,7 @@ import { useActionState } from "react";
 import {
   EyeIcon,
   EyeOffIcon,
+  Image,
   LockIcon,
   MailIcon,
   UserIcon,
@@ -18,9 +19,12 @@ export const SignUpForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  const [name, setName] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     if (state?.success) {
@@ -38,7 +42,7 @@ export const SignUpForm = () => {
   return (
     <form
       action={action}
-      className="w-full h-100 flex flex-col justify-center max-w-xs space-y-4 text-black"
+      className="w-full flex flex-col justify-center max-w-xs space-y-4 text-black"
     >
       {state?.message && (
         <p className="text-sm text-red-500">{state.message}</p>
@@ -48,18 +52,40 @@ export const SignUpForm = () => {
         <UserIcon className="h-5 w-5 text-app-secondary" />
         <input
           type="text"
-          id="name"
-          name="name"
-          placeholder="Name"
+          id="firstname"
+          name="firstname"
+          placeholder="Fornavn"
           className="flex-1 border-none outline-0 bg-transparent focus:ring-0 p-0"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          autoComplete="name"
+          value={firstname}
+          onChange={(e) => setFirstname(e.target.value)}
+          autoComplete="firstname"
           required
         />
       </div>
-      {state?.error?.name && (
-        <p className="text-sm text-red-500 text-center">{state.error.name}</p>
+      {state?.error?.firstname && (
+        <p className="text-sm text-red-500 text-center">
+          {state.error.firstname}
+        </p>
+      )}
+
+      <div className="relative flex items-center gap-2 rounded-md border border-app-secondary px-3 py-2 focus-within:ring-2 focus-within:ring-app-primary">
+        <UserIcon className="h-5 w-5 text-app-secondary" />
+        <input
+          type="text"
+          id="lastname"
+          name="lastname"
+          placeholder="efternavn"
+          className="flex-1 border-none outline-0 bg-transparent focus:ring-0 p-0"
+          value={lastname}
+          onChange={(e) => setLastname(e.target.value)}
+          autoComplete="lastname"
+          required
+        />
+      </div>
+      {state?.error?.lastname && (
+        <p className="text-sm text-red-500 text-center">
+          {state.error.lastname}
+        </p>
       )}
 
       <div className="relative flex items-center gap-2 rounded-md border border-app-secondary px-3 py-2 focus-within:ring-2 focus-within:ring-indigo-500">
@@ -109,6 +135,44 @@ export const SignUpForm = () => {
       {state?.error?.password && (
         <p className="text-sm text-red-500 text-center">
           {state.error.password}
+        </p>
+      )}
+
+      <div className="relative flex items-center gap-2 rounded-md border border-app-secondary px-3 py-2 focus-within:ring-2 focus-within:ring-app-primary">
+        <textarea
+          id="description"
+          name="description"
+          placeholder="beskrivelse"
+          className="flex-1 border-none outline-0 bg-transparent focus:ring-0 p-0 max-h-20 resize-none"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          autoComplete="beskrivelse"
+          required
+        />
+      </div>
+      {state?.error?.lastname && (
+        <p className="text-sm text-red-500 text-center">
+          {state.error.lastname}
+        </p>
+      )}
+
+      <div className="relative flex items-center gap-2 rounded-md border border-app-secondary px-3 py-2 focus-within:ring-2 focus-within:ring-app-primary">
+        <Image className="h-5 w-5 text-app-secondary" />
+        <input
+          type="text"
+          id="image"
+          name="image"
+          placeholder="Online billede url"
+          className="flex-1 border-none outline-0 bg-transparent focus:ring-0 p-0"
+          value={image}
+          onChange={(e) => setImage(e.target.value)}
+          autoComplete="image"
+          required
+        />
+      </div>
+      {state?.error?.lastname && (
+        <p className="text-sm text-red-500 text-center">
+          {state.error.lastname}
         </p>
       )}
 

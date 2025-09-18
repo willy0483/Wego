@@ -32,7 +32,7 @@ const MobilFilterNav = () => {
         <div className="flex flex-col gap-3">
           <div className="relative flex items-center gap-2 rounded-xl border border-gray-200 px-4 py-2 bg-white shadow-sm w-full h-12">
             <img
-              src="icons/Location.svg"
+              src="/icons/Location.svg"
               alt="Location icon"
               className="w-5 h-5 text-app-secondary"
             />
@@ -48,7 +48,7 @@ const MobilFilterNav = () => {
           </div>
           <div className="relative flex items-center gap-2 rounded-xl border border-gray-200 px-4 py-2 bg-white shadow-sm w-full h-12">
             <img
-              src="icons/Destination.svg"
+              src="/icons/Destination.svg"
               alt="destination icon"
               className="w-5 h-5 text-app-secondary"
             />

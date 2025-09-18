@@ -7,6 +7,20 @@ import { toast } from "sonner";
 
 export const Route = createFileRoute("/min-side/$userId")({
   component: RouteComponent,
+  head: () => ({
+    meta: [
+      { title: "Mine bookinger - WeGo" },
+      {
+        name: "description",
+        content:
+          "Se og administrer dine bookinger på WeGo. Slet bookinger og se detaljer om dine ture.",
+      },
+      {
+        name: "keywords",
+        content: "bookinger, bruger, lift, WeGo, slet, tur, detaljer",
+      },
+    ],
+  }),
 });
 
 function RouteComponent() {
