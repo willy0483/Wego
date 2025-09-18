@@ -37,6 +37,7 @@ export const getRecordsByUserId = async (req: Request, res: Response) => {
       select: {
         tripId: true,
         comment: true,
+        id: true,
       },
     });
 

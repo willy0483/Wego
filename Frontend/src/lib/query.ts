@@ -1,6 +1,7 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { api } from "./api";
 import type {
+  T_Booking,
   T_Reviewer,
   T_Slides,
   T_SådanVirkerDet,
@@ -41,4 +42,12 @@ export const useReviewsbyUser = (id: number) =>
     queryKey: ["ReviewsByTrips", id],
     queryFn: () => api.get<T_Reviewer[]>(`reviews/byUser/${id}`),
     staleTime: 1000 * 60 * 5,
+  });
+
+export const useBooking = (id: number, token?: string) =>
+  useQuery({
+    queryKey: ["Booking", id],
+    queryFn: () => api.get<T_Booking[]>(`bookings/byUser`, token),
+    staleTime: 1000 * 60 * 5,
+    enabled: !!token,
   });

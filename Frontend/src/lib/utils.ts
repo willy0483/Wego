@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export interface AuthContextType {
-  loginData: Session | null | undefined;
+  loginData: Session | null;
   createSession: (payload: Session) => boolean;
   logout: () => boolean;
   loading: boolean;

@@ -9,15 +9,22 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as MinSideRouteRouteImport } from './routes/min-side/route'
 import { Route as LiftRouteRouteImport } from './routes/lift/route'
 import { Route as authRouteRouteImport } from './routes/(auth)/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LiftIndexRouteImport } from './routes/lift/index'
+import { Route as MinSideUserIdRouteImport } from './routes/min-side/$userId'
 import { Route as LiftListIdRouteImport } from './routes/lift/$listId'
 import { Route as BookBookIdRouteImport } from './routes/book/$bookId'
 import { Route as authSignupIndexRouteImport } from './routes/(auth)/signup/index'
 import { Route as authLoginIndexRouteImport } from './routes/(auth)/login/index'
 
+const MinSideRouteRoute = MinSideRouteRouteImport.update({
+  id: '/min-side',
+  path: '/min-side',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LiftRouteRoute = LiftRouteRouteImport.update({
   id: '/lift',
   path: '/lift',
@@ -36,6 +43,11 @@ const LiftIndexRoute = LiftIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => LiftRouteRoute,
+} as any)
+const MinSideUserIdRoute = MinSideUserIdRouteImport.update({
+  id: '/$userId',
+  path: '/$userId',
+  getParentRoute: () => MinSideRouteRoute,
 } as any)
 const LiftListIdRoute = LiftListIdRouteImport.update({
   id: '/$listId',
@@ -61,16 +73,20 @@ const authLoginIndexRoute = authLoginIndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof authRouteRouteWithChildren
   '/lift': typeof LiftRouteRouteWithChildren
+  '/min-side': typeof MinSideRouteRouteWithChildren
   '/book/$bookId': typeof BookBookIdRoute
   '/lift/$listId': typeof LiftListIdRoute
+  '/min-side/$userId': typeof MinSideUserIdRoute
   '/lift/': typeof LiftIndexRoute
   '/login': typeof authLoginIndexRoute
   '/signup': typeof authSignupIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof authRouteRouteWithChildren
+  '/min-side': typeof MinSideRouteRouteWithChildren
   '/book/$bookId': typeof BookBookIdRoute
   '/lift/$listId': typeof LiftListIdRoute
+  '/min-side/$userId': typeof MinSideUserIdRoute
   '/lift': typeof LiftIndexRoute
   '/login': typeof authLoginIndexRoute
   '/signup': typeof authSignupIndexRoute
@@ -80,8 +96,10 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/(auth)': typeof authRouteRouteWithChildren
   '/lift': typeof LiftRouteRouteWithChildren
+  '/min-side': typeof MinSideRouteRouteWithChildren
   '/book/$bookId': typeof BookBookIdRoute
   '/lift/$listId': typeof LiftListIdRoute
+  '/min-side/$userId': typeof MinSideUserIdRoute
   '/lift/': typeof LiftIndexRoute
   '/(auth)/login/': typeof authLoginIndexRoute
   '/(auth)/signup/': typeof authSignupIndexRoute
@@ -91,20 +109,32 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/lift'
+    | '/min-side'
     | '/book/$bookId'
     | '/lift/$listId'
+    | '/min-side/$userId'
     | '/lift/'
     | '/login'
     | '/signup'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/book/$bookId' | '/lift/$listId' | '/lift' | '/login' | '/signup'
+  to:
+    | '/'
+    | '/min-side'
+    | '/book/$bookId'
+    | '/lift/$listId'
+    | '/min-side/$userId'
+    | '/lift'
+    | '/login'
+    | '/signup'
   id:
     | '__root__'
     | '/'
     | '/(auth)'
     | '/lift'
+    | '/min-side'
     | '/book/$bookId'
     | '/lift/$listId'
+    | '/min-side/$userId'
     | '/lift/'
     | '/(auth)/login/'
     | '/(auth)/signup/'
@@ -114,11 +144,19 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   authRouteRoute: typeof authRouteRouteWithChildren
   LiftRouteRoute: typeof LiftRouteRouteWithChildren
+  MinSideRouteRoute: typeof MinSideRouteRouteWithChildren
   BookBookIdRoute: typeof BookBookIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/min-side': {
+      id: '/min-side'
+      path: '/min-side'
+      fullPath: '/min-side'
+      preLoaderRoute: typeof MinSideRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lift': {
       id: '/lift'
       path: '/lift'
@@ -146,6 +184,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/lift/'
       preLoaderRoute: typeof LiftIndexRouteImport
       parentRoute: typeof LiftRouteRoute
+    }
+    '/min-side/$userId': {
+      id: '/min-side/$userId'
+      path: '/$userId'
+      fullPath: '/min-side/$userId'
+      preLoaderRoute: typeof MinSideUserIdRouteImport
+      parentRoute: typeof MinSideRouteRoute
     }
     '/lift/$listId': {
       id: '/lift/$listId'
@@ -206,10 +251,23 @@ const LiftRouteRouteWithChildren = LiftRouteRoute._addFileChildren(
   LiftRouteRouteChildren,
 )
 
+interface MinSideRouteRouteChildren {
+  MinSideUserIdRoute: typeof MinSideUserIdRoute
+}
+
+const MinSideRouteRouteChildren: MinSideRouteRouteChildren = {
+  MinSideUserIdRoute: MinSideUserIdRoute,
+}
+
+const MinSideRouteRouteWithChildren = MinSideRouteRoute._addFileChildren(
+  MinSideRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   authRouteRoute: authRouteRouteWithChildren,
   LiftRouteRoute: LiftRouteRouteWithChildren,
+  MinSideRouteRoute: MinSideRouteRouteWithChildren,
   BookBookIdRoute: BookBookIdRoute,
 }
 export const routeTree = rootRouteImport

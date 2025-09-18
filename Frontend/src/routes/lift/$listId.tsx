@@ -54,6 +54,7 @@ function RouteComponent() {
     pricePerSeat,
     routeDeviation,
     seatsTotal,
+    seatsBooked,
     useFerry,
     user,
     id,
@@ -487,11 +488,11 @@ function RouteComponent() {
               </div>
               <div className="px-4 pb-4">
                 <button
-                  disabled={bookings.length >= seatsTotal}
+                  disabled={seatsBooked >= seatsTotal}
                   onClick={() => handleBook()}
                   className={`rounded-2xl w-full py-2 text-white font-semibold transition-colors
                     ${
-                      bookings.length >= seatsTotal
+                      seatsBooked >= seatsTotal
                         ? "bg-gray-300 text-gray-500 cursor-not-allowed opacity-60"
                         : "bg-app-secondary hover:cursor-pointer hover:bg-app-primary90"
                     }
