@@ -42,7 +42,7 @@ har lavet lidt om på booking design så det passer lidt mere til mobil og deskt
 
 ### Redegørelse af de forskellige kodeelementer i prøven
 
-Jeg har bruge shadcn og tailwind til nogen komponter <https://ui.shadcn.com/docs> kan ogsp see i ui mappe
+Jeg har bruge shadcn og tailwind til nogen komponter <https://ui.shadcn.com/docs> kan også see i ui mappe
 
 jeg har bruge swiperjs til at lave silder
 <https://swiperjs.com/>
