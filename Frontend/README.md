@@ -29,7 +29,7 @@ For at kunne hente billeder fra backend, skal du tilføje følgende til din `vit
 ```typescript
 server: {
   proxy: {
-    "/images": "http://localhost:8000",
+    "/images": "http://localhost:8000", // hvis din backend køre på 8000
   },
 },
 ```
