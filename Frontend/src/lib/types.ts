@@ -18,9 +18,9 @@ export type FormState =
   | undefined;
 
 export const LoginFormSchema = z.object({
-  email: z.string().email({ message: "Please enter a valid email." }),
+  email: z.string().email({ message: "Indtast venligst en gyldig email." }),
   password: z.string().min(1, {
-    message: "Password field must not be empty.",
+    message: "Adgangskodefeltet må ikke være tomt.",
   }),
 });
 
@@ -28,29 +28,32 @@ export const SignupFormSchema = z.object({
   firstname: z
     .string()
     .min(2, {
-      message: "Name must be at least 2 characters long.",
+      message: "Navn skal være mindst 2 tegn langt.",
     })
     .trim(),
 
   lastname: z
     .string()
     .min(2, {
-      message: "Name must be at least 2 characters long.",
+      message: "Navn skal være mindst 2 tegn langt.",
     })
     .trim(),
 
-  email: z.string().email({ message: "Please enter a valid email." }).trim(),
+  email: z
+    .string()
+    .email({ message: "Indtast venligst en gyldig email." })
+    .trim(),
   password: z
     .string()
-    .min(8, { message: "Be at least 8 characters long." })
+    .min(8, { message: "Skal være mindst 8 tegn langt." })
     .regex(/[a-zA-Z]/, {
-      message: " Contain at least one letter.",
+      message: "Skal indeholde mindst et bogstav.",
     })
     .regex(/[0-9]/, {
-      message: " Contain at least one number.",
+      message: "Skal indeholde mindst et tal.",
     })
     .regex(/[^a-zA-Z0-9]/, {
-      message: " Contain at least one special character.",
+      message: "Skal indeholde mindst et specialtegn.",
     })
     .trim(),
   description: z.string().min(1, { message: "Må ikke være tom" }),
