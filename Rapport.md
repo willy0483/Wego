@@ -32,7 +32,7 @@ jeg startede med at læse opgaven igennem og lave issues og så satte jeg min te
 
 Jeg har ændret designet på login så den har sin egen side og det samme gælder signup.Mobilnav har dog ikke helt den samme stil men næsten
 
-lavert så filter også er der til mobil
+lavert så filter også er der til mobil i en dialog
 
 har lavet så man kan vælge flere bagage en eller flere
 
@@ -77,3 +77,7 @@ jeg vil gerne fortælle om hvorfor jeg har brugt tanstack og nogen af de ting de
 ### Day 4
 
 ![day4](./Frontend/public/bilag/day4.png)
+
+## Seo
+
+![Seo](./Frontend/public/bilag/lightHouse.png)

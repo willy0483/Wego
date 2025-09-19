@@ -16,7 +16,6 @@ const luggageOptions = [
   {
     icon: "/icons/bagage/Large.svg",
     fillIcon: "icons/bagage/Large-Fill.svg",
-
     text: "Stor",
     id: 3,
   },
