@@ -56,6 +56,10 @@ function RouteComponent() {
         queryKey: ["Booking", +userId],
       });
       toast.success("review delete", { id: "review delete" });
+    } else {
+      toast.error("Kunne ikke slette booking. Prøv igen.", {
+        id: "delete-error",
+      });
     }
   };
 
@@ -63,9 +67,7 @@ function RouteComponent() {
     <section className="container mx-auto my-10 px-4">
       <div className="flex justify-between items-center">
         <h2 className="text-xl font-bold mb-4">Mine bookinger</h2>
-        <h2>
-          {loginData?.user.firstname} {loginData?.user.lastname}
-        </h2>
+        <h2>{loginData?.user.firstname}</h2>
       </div>
       {isPending ? (
         <div className="text-center py-8 text-gray-500">

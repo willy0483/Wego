@@ -93,7 +93,7 @@ const Aside = () => {
           min={1}
           max={5}
           onChange={(e) => setSeats(+e.target.value)}
-          className="w-full"
+          className="w-full accent-app-secondary"
         />
       </section>
       <section className="border-b-2">
