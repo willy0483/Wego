@@ -22,13 +22,25 @@ git clone https://github.com/willy0483/Wego
 cd wego/frontend
 ```
 
-### 2. Install dependencies
+### 2. Sæt proxy op
+
+For at kunne hente billeder fra backend, skal du tilføje følgende til din `vite.config.ts`:
+
+```typescript
+server: {
+  proxy: {
+    "/images": "http://localhost:8000",
+  },
+},
+```
+
+### 3. Install dependencies
 
 ```bash
 npm install
 ```
 
-### 3. Run dit project
+### 4. Run dit project
 
 ```bash
 npm run dev
